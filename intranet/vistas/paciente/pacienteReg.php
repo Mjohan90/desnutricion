@@ -131,6 +131,7 @@ $(document).ready(function (e) {
                 url    : url,
                 data   : 'pers_dni=' + pers_dni,
                 success: function (datos) {
+                    console.log(datos);
                     var pers_data = jsonParse(datos);
                     if (pers_data) {
                         $('#txtPersNombre').val(pers_data['pers_nombres']);

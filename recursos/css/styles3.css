@@ -1723,6 +1723,15 @@ input[type='button']:active, .btn:active {
     border  : 0;
     padding : 0;
 }
+.width70px {
+    max-width : 70px;
+}
+.width80px {
+    max-width : 80px;
+}
+.width90px {
+    max-width : 90px;
+}
 .width100px {
     max-width : 100px;
 }

@@ -16,10 +16,8 @@
 		$diag_row = $diag_dal->getRow($diag_id);
 
 		$diag->diag_id	 = $diag_id;
-		$diag->nombre	 = getField('diag_nombre', $diag_row);
-		$diag->tratamiento_sug	 = getField('diag_tratamiento_sug', $diag_row);
-		$diag->dieta_sug	 = getField('diag_dieta_sug', $diag_row);
-		$diag->estado	 = getField('diag_estado', $diag_row);
+		$diag->atenc_id	 = getField('diag_atenc_id', $diag_row);
+		$diag->enferm_id	 = getField('diag_enferm_id', $diag_row);
 
 		$diag_rs = $diag_dal->actualizar($diag);
 		echo ($diag_rs == 1) ? 1 : 'No se ha podido actualizar';
