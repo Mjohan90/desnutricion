@@ -12,6 +12,10 @@
 	$pers_dal = new personaDAL();
 ?>
 <?php
+	include_once '../../datos/ubigeoDAL.php';
+	$ubig_dal = new ubigeoDAL();
+?>
+<?php
 	include_once '../../datos/tipodocidentDAL.php';
 	$tdi_dal = new tipodocidentDAL();
 ?>
@@ -94,6 +98,24 @@
     <td><input type='text' id='txtPersTelefono' name='txtPersTelefono' maxlength='20'
                placeholder='000-000000'/></td>
 </tr>
+<tr>
+    <td><label for='txtPersUbigID'>Lugar:</label></td>
+    <td>
+		<?php $ubig_list = $ubig_dal->getListAllDistritosCbo() ?>
+        <select name='txtPersUbigID' id='txtPersUbigID'>
+			<?php foreach ($ubig_list as $ubig_row) { ?>
+                <option value='<?= $ubig_row['ubig_id'] ?>'>
+					<?= $ubig_row['ubig_nombre_full'] ?>
+                </option>
+			<?php } ?>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><label for='txtPersDireccion'>Dirección:</label></td>
+    <td><input type='text' id='txtPersDireccion' name='txtPersDireccion' maxlength='20'
+               placeholder='direccion'/></td>
+</tr>
 </table>
 <hr class='separator'/>
 <div class='form_foot'>
@@ -161,6 +183,8 @@ $(document).ready(function (e) {
             var pers_email      = $('#txtPersEmail').val();
             var pers_celular    = $('#txtPersCelular').val();
             var pers_telefono   = $('#txtPersTelefono').val();
+            var pers_ubig_id   = $('#txtPersUbigID').val();
+            var pers_direccion  = $('#txtPersDireccion').val();
 
             $.post('vistas/paciente/proceso/paciente_insert.php', {
                     pac_pers_id    : pac_pers_id,
@@ -174,7 +198,9 @@ $(document).ready(function (e) {
                     pers_fecha_nac : pers_fecha_nac,
                     pers_email     : pers_email,
                     pers_celular   : pers_celular,
-                    pers_telefono  : pers_telefono
+                    pers_telefono  : pers_telefono,
+                    pers_ubig_id  : pers_ubig_id,
+                    pers_direccion : pers_direccion
                 },
                 function (datos) {
                     if (datos > 0) {
@@ -204,6 +230,8 @@ function pac_validar() {
     var pers_email      = $('#txtPersEmail').val();
     var pers_celular    = $('#txtPersCelular').val();
     var pers_telefono   = $('#txtPersTelefono').val();
+    var pers_ubig_id   = $('#txtPersUbigID').val();
+    var pers_direccion  = $('#txtPersDireccion').val();
 
     if (!isInteger(pac_pers_id)) {
         // showMessageWarning('Ingrese un valor de <b>pac pers id</b> válido', 'txtPacPersID');

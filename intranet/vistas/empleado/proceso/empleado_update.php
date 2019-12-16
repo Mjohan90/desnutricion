@@ -38,6 +38,8 @@
 		$pers->email      = getField('pers_email', $pers_row);
 		$pers->celular    = getField('pers_celular', $pers_row);
 		$pers->telefono   = getField('pers_telefono', $pers_row);
+		$pers->ubig_id    = getField('pers_ubig_id', $pers_row);
+		$pers->direccion  = getField('pers_direccion', $pers_row);
 		$pers->estado     = getField('pers_estado', $pers_row);
 		
 		$empl_rs = $empl_dal->actualizar($empl, $pers);

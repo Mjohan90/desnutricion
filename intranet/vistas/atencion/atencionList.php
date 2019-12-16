@@ -7,8 +7,9 @@
 <?php
 	include_once '../../datos/atencionDAL.php';
 	$atenc_dal  = new atencionDAL();
+	$fecha      = GetStrParam('fecha');
 	$b          = GetStrParam('b');
-	$atenc_list = $atenc_dal->listar($b);
+	$atenc_list = $atenc_dal->listar($fecha, $b);
 ?>
 <table id='tblatencion' class='datatable'>
     <tr>
@@ -16,7 +17,7 @@
         <th>Paciente</th>
         <th>Especialidad</th>
         <th>Fecha atenc</th>
-        <th>Observacion</th>
+        <th>Observación</th>
         <th>Tratamiento</th>
         <th>Dieta</th>
         <th>Situacion</th>
@@ -42,6 +43,13 @@
                 </td>
             </tr>
 		<?php } ?>
+	<?php } ?>
+	<?php if (count($atenc_list) == 0) { ?>
+        <tr>
+            <td colspan='12' class='nodata'>
+                No hay atenciones registradas para la fecha indicada
+            </td>
+        </tr>
 	<?php } ?>
 </table>
 <script>

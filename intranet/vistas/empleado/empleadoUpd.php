@@ -28,6 +28,10 @@
 	$tdi_dal = new tipodocidentDAL();
 ?>
 <?php
+	include_once '../../datos/ubigeoDAL.php';
+	$ubig_dal = new ubigeoDAL();
+?>
+<?php
 	include_once '../../datos/especialidadDAL.php';
 	$espec_dal = new especialidadDAL();
 ?>
@@ -155,7 +159,26 @@
 			echo $pers_row['pers_telefono'];
 		} ?>' maxlength='20' placeholder='000-000000'/></td>
 </tr>
-
+<tr>
+    <td><label for='txtPersUbigID'>Lugar:</label></td>
+    <td>
+		<?php $ubig_list = $ubig_dal->getListAllDistritosCbo() ?>
+        <select name='txtPersUbigID' id='txtPersUbigID'>
+			<?php foreach ($ubig_list as $ubig_row) { ?>
+                <option value='<?= $ubig_row['ubig_id'] ?>'
+				        <?= $pers_row ? ($pers_row['pers_ubig_id'] == $ubig_row['ubig_id'] ? 'selected' : '') : ''; ?>>
+					<?= $ubig_row['ubig_nombre_full'] ?>
+                </option>
+			<?php } ?>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><label for='txtPersDireccion'>Dirección:</label></td>
+    <td><input type='text' id='txtPersDireccion' name='txtPersDireccion' <?php if ($pers_row) {
+			echo $pers_row['pers_direccion'];
+		} ?> maxlength='20' placeholder='Direccion'/></td>
+</tr>
 <tr hidden>
     <td><label for='txtEmplEstado'>Estado:</label></td>
     <td><input type='text' id='txtEmplEstado' name='txtEmplEstado' value='<?php if ($empl_row) {
@@ -210,6 +233,8 @@ $(document).ready(function (e) {
             var pers_email      = $(empl_upd).find('#txtPersEmail').val();
             var pers_celular    = $(empl_upd).find('#txtPersCelular').val();
             var pers_telefono   = $(empl_upd).find('#txtPersTelefono').val();
+            var pers_ubig_id    = $(empl_upd).find('#txtPersUbigID').val();
+            var pers_direccion  = $(empl_upd).find('#txtPersDireccion').val();
 
             $.post('vistas/empleado/proceso/empleado_update.php', {
                     empl_id        : empl_id,
@@ -227,7 +252,9 @@ $(document).ready(function (e) {
                     pers_fecha_nac : pers_fecha_nac,
                     pers_email     : pers_email,
                     pers_celular   : pers_celular,
-                    pers_telefono  : pers_telefono
+                    pers_telefono  : pers_telefono,
+                    pers_ubig_id   : pers_ubig_id,
+                    pers_direccion : pers_direccion
                 },
                 function (datos) {
                     if (datos == 1) {
@@ -258,6 +285,9 @@ function empl_validar() {
     var pers_email      = $(empl_upd).find('#txtPersEmail').val();
     var pers_celular    = $(empl_upd).find('#txtPersCelular').val();
     var pers_telefono   = $(empl_upd).find('#txtPersTelefono').val();
+    var pers_direccion  = $(empl_upd).find('#txtPersDireccion').val();
+    var pers_ubig_id    = $(empl_upd).find('#txtPersUbigID').val();
+    var pers_direccion  = $(empl_upd).find('#txtPersDireccion').val();
 
     if (!(isInteger(empl_pers_id) && empl_pers_id > 0)) {
         showMessageWarning('Seleccione <b>persona</b>', 'txtEmplPersID');

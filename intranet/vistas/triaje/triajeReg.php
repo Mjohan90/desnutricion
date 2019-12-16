@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                     <td><label>Edad:</label></td>
-					<?php $edad = edad(todayYMD(), $pac_row['pers_fecha_nac'], true); ?>
+					<?php $edad = edad($atenc_row['atenc_fecha_reg'], $pac_row['pers_fecha_nac'], true); ?>
                     <td><span><?= $edad['anios'] ?> años</span></td>
                 </tr>
                 <tr>

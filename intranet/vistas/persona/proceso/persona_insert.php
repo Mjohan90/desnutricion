@@ -8,7 +8,10 @@
 	include_once '../../../entidades/persona.php';
 	include_once '../../../datos/personaDAL.php';
 	
-	if (isset($_POST['pers_nombre'], $_POST['pers_snombre'], $_POST['pers_ap_paterno'], $_POST['pers_ap_materno'], $_POST['pers_tdi_id'], $_POST['pers_tdi_nro'], $_POST['pers_sexo'], $_POST['pers_fecha_nac'], $_POST['pers_email'], $_POST['pers_celular'], $_POST['pers_telefono'])) {
+	if (isset($_POST['pers_nombre'], $_POST['pers_snombre'], $_POST['pers_ap_paterno'],
+			$_POST['pers_ap_materno'], $_POST['pers_tdi_id'], $_POST['pers_tdi_nro'],
+			$_POST['pers_sexo'], $_POST['pers_fecha_nac'], $_POST['pers_email'],
+			$_POST['pers_celular'], $_POST['pers_telefono'], $_POST['pers_ubigeo'], $_POST['pers_direccion'])) {
 		
 		$pers_dal = new personaDAL();
 		$pers     = new persona();
@@ -24,6 +27,8 @@
 		$pers->email      = $_POST['pers_email'];
 		$pers->celular    = $_POST['pers_celular'];
 		$pers->telefono   = $_POST['pers_telefono'];
+		$pers->ubig_id    = $_POST['pers_ubigeo'];
+		$pers->direccion  = $_POST['pers_direccion'];
 		
 		$pers_rs = $pers_dal->registrar($pers);
 		echo ($pers_rs > 0) ? $pers_rs : 'No se ha podido registrar';

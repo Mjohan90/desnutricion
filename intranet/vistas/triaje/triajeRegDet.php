@@ -63,7 +63,7 @@
 					'var_tipo_escala' => $var_row['var_tipo_escala'],
 					'triaje_um_id'    => $var_row['um_id'],
 					'triaje_um_abrev' => $var_row['um_abrev'],
-					'triaje_valor'    => ($var_row['var_id'] == VAR_EDAD) ? edad(todayYMD(), $pac_row['pers_fecha_nac'], false) : 0
+					'triaje_valor'    => ($var_row['var_id'] == VAR_EDAD) ? edad($atenc_row['atenc_fecha_reg'], $pac_row['pers_fecha_nac'], false) : 0
 				];
 				
 			}
@@ -144,7 +144,7 @@
 	<?php if ($item['var_tipo_var'] == TVAR_NUMERIC) { ?>
         <td class='txt_center'>
 			<?php $hidden = ($item['var_id'] == VAR_EDAD) ? "hidden" : ""; ?>
-			<?php $edad = edad(todayYMD(), $pac_row['pers_fecha_nac'], true); ?>
+			<?php $edad = edad($atenc_row['atenc_fecha_reg'], $pac_row['pers_fecha_nac'], true); ?>
 
             <input <?= $hidden ?>
                    type='text' id='txtTriajeValor_<?php echo $var_key; ?>'

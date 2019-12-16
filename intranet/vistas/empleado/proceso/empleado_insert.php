@@ -37,6 +37,8 @@
 		$pers->email      = $_POST['pers_email'];
 		$pers->celular    = $_POST['pers_celular'];
 		$pers->telefono   = $_POST['pers_telefono'];
+		$pers->ubig_id    = $_POST['pers_ubig_id'];
+		$pers->direccion  = $_POST['pers_direccion'];
 		
 		$empl           = new empleado();
 		$empl->pers_id  = $_POST['empl_pers_id'];

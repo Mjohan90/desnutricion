@@ -104,7 +104,7 @@
         </ul>
     </li>
 <?php } ?>
-<?php if ($rol_id == ROL_RECEPCION) { ?>
+<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_RECEPCION) { ?>
     <li><a href='#'>Pacientes</a>
         <ul class='sub-menu'>
             <li><a href='#' onclick="load('paciente')">Pacientes</a></li>
@@ -115,13 +115,13 @@
 <?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_MEDICO || $rol_id == ROL_RECEPCION || $rol_id == ROL_ENFERMERA) { ?>
     <li><a href='#'>Atenciones</a>
         <ul class='sub-menu'>
-			<?php if ($rol_id == ROL_RECEPCION) { ?>
+			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_RECEPCION) { ?>
                 <li><a href='#' onclick="loadOn('atencion', 'cita')">Citas</a></li>
 			<?php } ?>
-			<?php if ($rol_id == ROL_MEDICO || $rol_id == ROL_ENFERMERA) { ?>
+			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA) { ?>
                 <li><a href='#' onclick="load('triaje')">Triaje</a></li>
 			<?php } ?>
-			<?php if ($rol_id == ROL_MEDICO) { ?>
+			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_MEDICO) { ?>
                 <li><a href='#' onclick="load('atencion')">Atenciones</a></li>
 			<?php } ?>
 			<?php if ($rol_id == ROL_ADMIN) { ?>
@@ -135,6 +135,13 @@
         <ul class='sub-menu'>
             <li><a href='#' onclick="load('empleado')">Empleados</a></li>
             <li><a href='#' onclick="load('cargo')">Cargos</a></li>
+        </ul>
+    </li>
+<?php } ?>
+<?php if ($rol_id == ROL_ADMIN) { ?>
+    <li><a href='#'>Reportes</a>
+        <ul class='sub-menu'>
+            <li><a href='#' onclick="loadOn('reportes', 'niveldesnutricion')">Niveles de desnutrición</a></li>
         </ul>
     </li>
 <?php } ?>

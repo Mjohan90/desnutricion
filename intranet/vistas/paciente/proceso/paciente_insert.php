@@ -21,7 +21,9 @@
 		'pers_fecha_nac',
 		'pers_email',
 		'pers_celular',
-		'pers_telefono'
+		'pers_telefono',
+		'pers_ubig_id',
+		'pers_direccion',
 	])) {
 		$pac          = new paciente();
 		$pac->pers_id = $_POST['pac_pers_id'];
@@ -38,6 +40,8 @@
 		$pers->email      = $_POST['pers_email'];
 		$pers->celular    = $_POST['pers_celular'];
 		$pers->telefono   = $_POST['pers_telefono'];
+		$pers->ubig_id    = $_POST['pers_ubigeo'];
+		$pers->direccion  = $_POST['pers_direccion'];
 		
 		$dal_pac = new pacienteDAL();
 		$pac_rs  = $dal_pac->registrar($pac, $pers);

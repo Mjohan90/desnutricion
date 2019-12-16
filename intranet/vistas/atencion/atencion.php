@@ -10,9 +10,11 @@
         <hr class='separator'/>
         <div>
             <label for='txtBuscar'>Buscar:</label>
+            <input type='text' id='txtFecha' name='txtFecha' class='txt120' value='<?= today(); ?>'
+                   placeholder='00/00/0000'/>
             <input type='text' id='txtBuscar' name='txtBuscar' placeholder='Ingrese búsqueda'/>
-            <a href='#' class='btn' id='btnRefrescar' name='btnRefrescar'>
-                <img class='icon' src='../recursos/img/refresh.png'>
+            <a href='#' class='btn' id='btnRefrescar'>
+                <img class='icon' src='../recursos/img/refresh.png' alt=''>
             </a>
         </div>
     </div>
@@ -25,7 +27,11 @@
     var frm_atenc = '#frmAtencion';
     $(document).ready(function (e) {
         atenc_mostrarDatos();
+        $(frm_atenc).find('#txtFecha').datepicker();
         $(frm_atenc).find('#txtBuscar').focus();
+        $(frm_atenc).find('#txtFecha').change(function (e) {
+            atenc_mostrarDatos();
+        });
         $(frm_atenc).find('#txtBuscar').keyup(function (e) {
             atenc_mostrarDatos();
         });
@@ -38,8 +44,9 @@
     });
 
     function atenc_mostrarDatos() {
+        var fecha  = encodeURIComponent(getDateYMD($(frm_atenc).find('#txtFecha').val()));
         var buscar = encodeURIComponent($('#txtBuscar').val());
-        $(frm_atenc).find('#datos').load('vistas/atencion/atencionList.php?b=' + buscar);
+        $(frm_atenc).find('#datos').load('vistas/atencion/atencionList.php?b=' + buscar + '&fecha=' + fecha);
     }
 
     function volver() {

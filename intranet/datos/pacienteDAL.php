@@ -54,7 +54,9 @@
 					'$pers->fecha_nac',
 					'$pers->email',
 					'$pers->celular',
-					'$pers->telefono');");
+					'$pers->telefono',
+					'$pers->ubig_id',
+					'$pers->direccion');");
 			
 			$pers_id = $rs ? $mysql->getLastID() : 0;
 			
@@ -89,7 +91,9 @@
 					'$pers->fecha_nac',
 					'$pers->email',
 					'$pers->celular',
-					'$pers->telefono');");
+					'$pers->telefono',
+					'$pers->ubig_id',
+					'$pers->direccion');");
 			
 			return $rs;
 		}

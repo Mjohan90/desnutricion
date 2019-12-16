@@ -27,7 +27,6 @@
 	include_once '../../datos/especialidadDAL.php';
 	$espec_dal = new especialidadDAL();
 ?>
-
 <form id='frmAtencionUpd' method='post'>
 <div class='regform'>
 <div class='regform_body'>
@@ -63,7 +62,7 @@
 </tr>
 <tr>
     <td><label>Edad:</label></td>
-	<?php $edad = edad(todayYMD(), $pac_row['pers_fecha_nac'], true); ?>
+	<?php $edad = edad($atenc_row['atenc_fecha_reg'], $pac_row['pers_fecha_nac'], true); ?>
     <td><span><?= $edad['anios'] ?> años</span> - Fecha Nac: <?= formatDate($pac_row['pers_fecha_nac']) ?> </td>
 </tr>
 <tr hidden>
@@ -105,16 +104,17 @@
         <div>
             <hr class='separator_bold'>
             <br>
-            <!--            <a href='#' class='btn'>Ver ficha tecnica</a>-->
-            <a href='#' id='btnTriaje' class='btn b_verde'>Triaje</a>
+            <a href='#' id='btnTriaje' class='btn b_verde'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Realizar Triaje  &nbsp;&nbsp;&nbsp;</a>
             <a href='#' id='btnVerResultados' class='btn b_verde'>Ver resultados experto</a>
-            <!--            <a href='#' class='btn'>Ver grafico evolución</a>-->
+            <br>
+            <a href='#' id='btnVerFicha' class='btn'><img src='../recursos/img/table.png' alt=''> Ver ficha tecnica</a>
+            <a href='#' id='btnVerGrafico' class='btn'><img src='../recursos/img/chart.png' alt=''> Ver grafico evolución</a>
         </div>
     </td>
 </tr>
 <tr>
     <td><label for='txtAtencObservacion'>Observacion:</label></td>
-    <td><textarea id='txtAtencObservacion' name='txtAtencObservacion' maxlength='200' rows='5' cols='50'
+    <td><textarea id='txtAtencObservacion' name='txtAtencObservacion' maxlength='200' rows='8' cols='50'
                   class='' placeholder=''><?php if ($atenc_row) {
 				echo htmlspecialchars($atenc_row['atenc_observacion']);
 			} ?></textarea>
@@ -159,7 +159,6 @@
 </div>
 </div>
 </form>
-
 <br/>
 <script>
 var atenc_upd = '#frmAtencionUpd';
@@ -170,8 +169,17 @@ $(document).ready(function (e) {
         performLoad('vistas/triaje/triajeReg.php?atenc_id=<?= $atenc_id; ?>&parent=vistas/atencion/atencionUpd.php?atenc_id=<?= $atenc_id; ?>');
     });
 
+    $(atenc_upd).find('#btnVerGrafico').off('click').click(function (e) {
+        performLoad('vistas/atencion/evolucion.php?atenc_id=<?= $atenc_id; ?>&parent=vistas/atencion/atencionUpd.php?atenc_id=<?= $atenc_id; ?>');
+    });
+
+    $(atenc_upd).find('#btnVerFicha').off('click').click(function (e) {
+        performLoad('vistas/atencion/ficha.php?pac_id=<?= $atenc_row['pac_id']; ?>&parent=vistas/atencion/atencionUpd.php?atenc_id=<?= $atenc_id; ?>');
+    });
+
     $(atenc_upd).find('#btnVerResultados').off('click').click(function (e) {
-        $('#divResultado').load('vistas/atencion/resultado.php');
+        var atenc_id = '<?php echo $atenc_id; ?>';
+        $('#divResultado').load('vistas/atencion/resultado.php?atenc_id=' + atenc_id);
     });
 
     $(atenc_upd).find('#btnActualizar').off('click').click(function (e) {

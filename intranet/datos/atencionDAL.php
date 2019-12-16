@@ -18,15 +18,40 @@
 			return $row;
 		}
 		
+		function detectEnfermedad($atenc_id) {
+			$mysql = new Conexion();
+			$rs    = $mysql->ejecutar("CALL pa_diagnostico_detectEnfermedad('$atenc_id');");
+			$row   = $rs ? mysqli_fetch_assoc($rs) : null;
+			return $row;
+		}
+		
+		function getValoresNormalesEdad($edad_meses, $sexo) {
+			$mysql = new Conexion();
+			$rs    = $mysql->ejecutar("CALL pa_diagnostico_getValoresNormalesEdad('$edad_meses', '$sexo');");
+			return $mysql->rsToArray($rs);
+		}
+		
 		public function listarcbo($atenc_id = 0) {
 			$mysql = new Conexion();
 			$rs    = $mysql->ejecutar("CALL pa_atencion_listcbo('$atenc_id');");
 			return $mysql->rsToArray($rs);
 		}
 		
-		public function listar($b = '', $atenc_estado = 1) {
+		public function listarByPaciente($pac_id = 0) {
 			$mysql = new Conexion();
-			$rs    = $mysql->ejecutar("CALL pa_atencion_list('$b', '$atenc_estado');");
+			$rs    = $mysql->ejecutar("CALL pa_atencion_listarByPaciente('$pac_id');");
+			return $mysql->rsToArray($rs);
+		}
+		
+		public function listar($fecha, $b = '', $atenc_estado = 1) {
+			$mysql = new Conexion();
+			$rs    = $mysql->ejecutar("CALL pa_atencion_list('$fecha', '$b', '$atenc_estado');");
+			return $mysql->rsToArray($rs);
+		}
+		
+		public function getTriajeValores($pac_id) {
+			$mysql = new Conexion();
+			$rs    = $mysql->ejecutar("CALL pa_atencion_getTriajeValores('$pac_id');");
 			return $mysql->rsToArray($rs);
 		}
 		

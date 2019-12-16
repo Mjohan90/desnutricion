@@ -14,6 +14,8 @@
 		var $email;
 		var $celular;
 		var $telefono;
+		var $ubig_id;
+		var $direccion;
 		var $estado;
 
 		public function getPersID() {
