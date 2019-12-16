@@ -1,0 +1,138 @@
+@charset "utf-8";
+/*  Requiere:
+    - jQuery.UI (v1.11.2+)
+*/
+
+/* jquery-datepicker ========================================================== */
+.ui-datepicker {
+    background-color : #18b4fd;
+    /* border-radius: 2px; */
+    padding          : 0px;
+    display          : none;
+    border           : 1px solid #d3d6d8;
+    color            : white;
+}
+/* Caja de texto del datepicker */
+.hasDatepicker {
+    /* padding-right : 34px !important; */
+}
+.ui-datepicker-header {
+    text-align : center;
+}
+/* Boton que muestra el calendar */
+.ui-datepicker-trigger {
+    cursor           : pointer;
+    padding          : 4px 2px;
+    /* introducir este boton dentro del texbox */
+    position         : relative;
+    margin-left      : -33px;
+    width            : 32px;
+    top              : 4px;
+    height           : 22pt;
+    /* color del boton */
+    background-color : #f1f1f1;
+    border           : 1px solid transparent;
+}
+.ui-datepicker-trigger:hover {
+    background-color : #d9eaf4;
+    border           : 1px solid transparent;
+}
+/* Boton "Hoy" */
+.ui-datepicker-current {
+    background-color : #0284c2;
+    border           : 1px solid #0279b4;
+    /* border-radius: 4px; */
+    color            : #ffffff;
+    cursor           : pointer;
+    height           : 22px;
+    width            : 50px;
+    margin           : 2px;
+}
+.ui-datepicker-current:hover {
+    background-color : #0279b4;
+    border           : 1px solid #028fd1;
+}
+/* Botones atras y adelante */
+.ui-datepicker-prev {
+    display          : inline-block;
+    cursor           : pointer;
+    content          : url(../img/arrow/left.png);
+    padding          : 6px 8px 6px 6px;
+    float            : left;
+    background-color : #18b4fd;
+}
+.ui-datepicker-nexter-prev:before {
+    content : url('../img/arrow/left.png');
+}
+.ui-datepicker-next {
+    display          : inline-block;
+    cursor           : pointer;
+    content          : url(../img/arrow/right.png);
+    padding          : 6px 6px 6px 8px;
+    float            : right;
+    background-color : #18b4fd;
+}
+.ui-datepicker-next:after {
+    content : url('../img/arrow/right.png');
+}
+.ui-datepicker-prev:hover,
+.ui-datepicker-next:hover {
+    background-color : #55dfff;
+}
+/* Contenido del datepicker */
+.ui-datepicker-title {
+    display : inline-block;
+}
+.ui-datepicker-month,
+.ui-datepicker-year {
+    height : 24px;
+    width  : 60px;
+}
+/* Fecha de hoy*/
+.ui-state-highlight {
+    color       : #b32d00;
+    font-weight : bold;
+}
+/* Fecha seleccionada */
+.ui-state-active {
+    color       : #0673b7;
+    font-weight : bold;
+}
+/* Contenido del calendario */
+.ui-datepicker-calendar {
+    margin     : auto;
+    cursor     : pointer;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffff+0,d2ebf9+100;Blue+3D+%2312 */
+    background : #eaf8ff; /* Old browsers */
+
+}
+.ui-datepicker-calendar thead {
+    width            : 24px !important;
+    background-color : #bee0f9;
+    color            : #2d7fa3;
+    font-size        : 9.5pt;
+    text-align       : center;
+    cursor           : pointer;
+}
+.ui-datepicker-calendar td {
+    width            : 24px !important;
+    background-color : #eaf8ff;
+    font-size        : 9.5pt;
+    text-align       : center;
+    cursor           : pointer;
+}
+.ui-datepicker-calendar td:hover {
+    background-color : #3db5d9;
+}
+.ui-datepicker-calendar td:hover a {
+    color : #ffffff;
+}
+.ui-datepicker-calendar td a {
+    text-decoration : none;
+}
+.ui-datepicker-buttonpane {
+    text-align : center;
+}
+.ui-datepicker-close {
+    display : none;
+}
