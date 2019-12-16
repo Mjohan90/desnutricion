@@ -12,11 +12,11 @@
 	$tparent_dal = new tipoparentescoDAL();
 ?>
 <?php
-	$action      = GetStringParam('action');
-	$xpers_id    = GetNumericParam('xpers_id');
-	$pers_id     = GetNumericParam('pers_id');
-	$pers_key    = GetStringParam('pers_key');
-	$key_pressed = GetStringParam('key_pressed');
+	$action      = GetStrParam('action');
+	$xpers_id    = GetNumParam('xpers_id');
+	$pers_id     = GetNumParam('pers_id');
+	$pers_key    = GetStrParam('pers_key');
+	$key_pressed = GetStrParam('key_pressed');
 	
 	$array_key = "parent.pers{$xpers_id}";
 	
@@ -65,7 +65,7 @@
 		$array = $_SESSION[$array_key][$pers_key];
 		
 		if (IssetGetParam('parent_tparent_id')) {
-			$array['parent_tparent_id'] = GetNumericParam('parent_tparent_id');
+			$array['parent_tparent_id'] = GetNumParam('parent_tparent_id');
 			echo "<script>changeFocus('txtParentTparentID', '$pers_key', '$key_pressed');</script>";
 		}
 		if (IssetGetParam('parent_es_apoderado')) {
@@ -73,7 +73,7 @@
 			foreach ($array_data as $key => $data) {
 				$_SESSION[$array_key][$key]['parent_es_apoderado'] = 0;
 			}
-			$array['parent_es_apoderado'] = GetNumericParam('parent_es_apoderado');
+			$array['parent_es_apoderado'] = GetNumParam('parent_es_apoderado');
 			echo "<script>changeFocus('txtParentEsApoderado', '$pers_key', '$key_pressed');</script>";
 		}
 		

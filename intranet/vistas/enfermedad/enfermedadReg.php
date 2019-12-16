@@ -7,6 +7,10 @@
 <?php
 	$parent = ReceiveParent('enferm_reg', 'vistas/enfermedad/enfermedad.php');
 ?>
+<?php
+	include_once '../../datos/claseenfermedadDAL.php';
+	$clsenferm_dal = new claseenfermedadDAL();
+?>
 <form id='frmEnfermedadReg' method='post'>
     <div class='regform'>
         <div class='regform_body'>
@@ -16,10 +20,21 @@
             <hr class='separator'/>
             <table class='form_data'>
                 <tr>
-                    <td class='width70px'>
-                        <label for='txtEnfermNombre'>Nombre:</label></td>
-                    <td  class='width200px'>
-                        <input type='text' id='txtEnfermNombre' name='txtEnfermNombre' maxlength='50'
+                    <td><label for='txtEnfermClsenfermID'>Clase de enfermedad:</label></td>
+                    <td><select id='txtEnfermClsenfermID' name='txtEnfermClsenfermID'> <!-- maxlength='10' -->
+                            <option value='0'>(Seleccione)</option>
+				            <?php $clsenferm_list = $clsenferm_dal->listarcbo(); ?>
+				            <?php foreach ($clsenferm_list as $row) { ?>
+                                <option value='<?php echo $row['clsenferm_id']; ?>'>
+						            <?php echo $row['clsenferm_nombre']; ?>
+                                </option>
+				            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for='txtEnfermNombre'>Nombre:</label></td>
+                    <td><input type='text' id='txtEnfermNombre' name='txtEnfermNombre' maxlength='50'
                                placeholder='Ingrese nombre'/></td>
                 </tr>
                 <tr>
@@ -50,11 +65,13 @@ $(document).ready(function (e) {
     $(enferm_reg).find('#btnRegistrar').off('click').click(function (e) {
         if (enferm_validar()) {
             var enferm_nombre          = $(enferm_reg).find('#txtEnfermNombre').val();
+            var enferm_clsenferm_id    = $(enferm_reg).find('#txtEnfermClsenfermID').val();
             var enferm_tratamiento_sug = $(enferm_reg).find('#txtEnfermTratamientoSug').val();
             var enferm_dieta_sug       = $(enferm_reg).find('#txtEnfermDietaSug').val();
 
             $.post('vistas/enfermedad/proceso/enfermedad_insert.php', {
                     enferm_nombre         : enferm_nombre,
+                    enferm_clsenferm_id   : enferm_clsenferm_id,
                     enferm_tratamiento_sug: enferm_tratamiento_sug,
                     enferm_dieta_sug      : enferm_dieta_sug
                 },
@@ -75,6 +92,7 @@ $(document).ready(function (e) {
 
 function enferm_validar() {
     var enferm_nombre          = $(enferm_reg).find('#txtEnfermNombre').val();
+    var enferm_clsenferm_id    = $(enferm_reg).find('#txtEnfermClsenfermID').val();
     var enferm_tratamiento_sug = $(enferm_reg).find('#txtEnfermTratamientoSug').val();
     var enferm_dieta_sug       = $(enferm_reg).find('#txtEnfermDietaSug').val();
 
@@ -82,9 +100,13 @@ function enferm_validar() {
         showMessageWarning('Ingrese una <b>nombre</b> válida de enfermedad', 'txtEnfermNombre');
         return false;
     }
-    if (enferm_tratamiento_sug == '') {
-        showMessageWarning('Ingrese una <b>tratamiento sug</b> válida', 'txtEnfermTratamientoSug');
+    if (!(isInteger(enferm_clsenferm_id) && enferm_clsenferm_id > 0)) {
+        showMessageWarning('Seleccione <b>clase de enfermedad</b>', 'txtEnfermClsenfermID');
         return false;
+    }
+    if (enferm_tratamiento_sug == '') {
+        // showMessageWarning('Ingrese una <b>tratamiento sug</b> válida', 'txtEnfermTratamientoSug');
+        // return false;
     }
     if (enferm_dieta_sug == '') {
         // showMessageWarning('Ingrese una <b>dieta sug</b> válida', 'txtEnfermDietaSug');

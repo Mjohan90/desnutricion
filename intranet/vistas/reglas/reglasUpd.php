@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/reglasDAL.php';
 	$regla_dal = new reglasDAL();
-	$regla_id = GetNumericParam('regla_id');
+	$regla_id = GetNumParam('regla_id');
 
 	$regla_row = $regla_dal->getByID($regla_id);
 ?>

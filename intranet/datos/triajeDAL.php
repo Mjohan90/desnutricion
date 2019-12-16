@@ -28,7 +28,13 @@
 			$rs = $mysql->ejecutar("CALL pa_triaje_list('$b', '$triaje_estado');");
 			return $mysql->rsToArray($rs);
 		}
-
+		
+		public function listarByAtencion($atenc_id) {
+			$mysql = new Conexion();
+			$rs    = $mysql->ejecutar("CALL pa_triaje_listByAtencion('$atenc_id');");
+			return $mysql->rsToArray($rs);
+		}
+		
 		public function registrar(triaje $triaje) {
 			$mysql = new Conexion(false);
 			$mysql->conectar();
@@ -38,7 +44,8 @@
 					'$triaje->atenc_id',
 					'$triaje->var_id',
 					'$triaje->um_id',
-					'$triaje->valor');");
+					'$triaje->valor',
+					'$triaje->escala');");
 
 			$triaje_id = $rs ? $mysql->getLastID() : 0;
 			$mysql->desconectar();
@@ -53,7 +60,9 @@
 					'$triaje->atenc_id',
 					'$triaje->var_id',
 					'$triaje->um_id',
-					'$triaje->valor');");
+					'$triaje->valor',
+					'$triaje->escala',
+					'$triaje->estado');");
 			return $rs;
 		}
 

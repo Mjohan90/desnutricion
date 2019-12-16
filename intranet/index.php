@@ -95,6 +95,8 @@
                 <li><a href='#'>Experto</a>
                     <ul class='sub-menu'>
                         <li><a href='#' onclick="load('categvariable')">Categorías de variable</a></li>
+                        <li><a href='#' onclick="load('variable')">Variables</a></li>
+                        <li><a href='#' onclick="load('claseenfermedad')">Clase de enfermedad</a></li>
                         <li><a href='#' onclick="load('enfermedad')">Enfermedad</a></li>
                     </ul>
                 </li>

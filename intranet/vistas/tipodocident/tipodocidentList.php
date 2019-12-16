@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/tipodocidentDAL.php';
 	$tdi_dal = new tipodocidentDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$tdi_list = $tdi_dal->listar($b);
 ?>
 <table id='tbltipodocident' class='datatable'>

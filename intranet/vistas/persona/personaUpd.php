@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/personaDAL.php';
 	$pers_dal = new personaDAL();
-	$pers_id = GetNumericParam('pers_id');
+	$pers_id = GetNumParam('pers_id');
 
 	$pers_row = $pers_dal->getByID($pers_id);
 ?>

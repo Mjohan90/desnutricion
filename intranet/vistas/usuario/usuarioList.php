@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/usuarioDAL.php';
 	$usu_dal  = new usuarioDAL();
-	$b        = GetStringParam('b');
+	$b        = GetStrParam('b');
 	$usu_list = $usu_dal->listar($b);
 ?>
 <table id='tblusuario' class='datatable'>

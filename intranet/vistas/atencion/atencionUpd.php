@@ -14,7 +14,7 @@
 <?php
 	include_once '../../datos/atencionDAL.php';
 	$atenc_dal = new atencionDAL();
-	$atenc_id  = GetNumericParam('atenc_id');
+	$atenc_id  = GetNumParam('atenc_id');
 	
 	$atenc_row = $atenc_dal->getByID($atenc_id);
 	$pac_row   = $pac_dal->getByID($atenc_row['pac_id']);

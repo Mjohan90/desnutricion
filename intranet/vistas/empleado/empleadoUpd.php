@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/empleadoDAL.php';
 	$empl_dal = new empleadoDAL();
-	$empl_id  = GetNumericParam('empl_id');
+	$empl_id  = GetNumParam('empl_id');
 	
 	$empl_row = $empl_dal->getByID($empl_id);
 ?>

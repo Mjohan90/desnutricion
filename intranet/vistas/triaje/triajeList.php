@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/triajeDAL.php';
 	$triaje_dal = new triajeDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$triaje_list = $triaje_dal->listar($b);
 ?>
 <table id='tbltriaje' class='datatable'>

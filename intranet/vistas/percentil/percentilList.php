@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/percentilDAL.php';
 	$percent_dal = new percentilDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$percent_list = $percent_dal->listar($b);
 ?>
 <table id='tblpercentil' class='datatable'>

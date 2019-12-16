@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/parentescoDAL.php';
 	$parent_dal = new parentescoDAL();
-	$parent_id = GetNumericParam('parent_id');
+	$parent_id = GetNumParam('parent_id');
 
 	$parent_row = $parent_dal->getByID($parent_id);
 ?>

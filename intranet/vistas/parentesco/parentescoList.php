@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/parentescoDAL.php';
 	$parent_dal = new parentescoDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$parent_list = $parent_dal->listar($b);
 ?>
 <table id='tblparentesco' class='datatable'>

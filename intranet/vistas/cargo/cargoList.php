@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/cargoDAL.php';
 	$carg_dal = new cargoDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$carg_list = $carg_dal->listar($b);
 ?>
 <table id='tblcargo' class='datatable'>

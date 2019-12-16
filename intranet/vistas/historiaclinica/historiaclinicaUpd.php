@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/historiaclinicaDAL.php';
 	$hc_dal = new historiaclinicaDAL();
-	$hc_id = GetNumericParam('hc_id');
+	$hc_id = GetNumParam('hc_id');
 
 	$hc_row = $hc_dal->getByID($hc_id);
 ?>

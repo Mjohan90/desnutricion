@@ -7,8 +7,8 @@
 <?php
 	include_once '../../datos/atencionDAL.php';
 	$atenc_dal  = new atencionDAL();
-	$fecha      = GetStringParam('fecha');
-	$b          = GetStringParam('b');
+	$fecha      = GetStrParam('fecha');
+	$b          = GetStrParam('b');
 	$atenc_list = $atenc_dal->listarByFecha($fecha, $b);
 ?>
 <table id='tblatencion' class='datatable'>

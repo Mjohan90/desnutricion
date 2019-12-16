@@ -8,12 +8,13 @@
 	include_once '../../../entidades/enfermedad.php';
 	include_once '../../../datos/enfermedadDAL.php';
 
-	if (isset($_POST['enferm_nombre'], $_POST['enferm_tratamiento_sug'], $_POST['enferm_dieta_sug'])){
+	if (isset($_POST['enferm_nombre'], $_POST['enferm_clsenferm_id'], $_POST['enferm_tratamiento_sug'], $_POST['enferm_dieta_sug'])){
 
 		$enferm_dal = new enfermedadDAL();
 		$enferm = new enfermedad();
 
 		$enferm->nombre = $_POST['enferm_nombre'];
+		$enferm->clsenferm_id = $_POST['enferm_clsenferm_id'];
 		$enferm->tratamiento_sug = $_POST['enferm_tratamiento_sug'];
 		$enferm->dieta_sug = $_POST['enferm_dieta_sug'];
 

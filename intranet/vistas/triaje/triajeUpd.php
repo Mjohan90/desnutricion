@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/triajeDAL.php';
 	$triaje_dal = new triajeDAL();
-	$triaje_id = GetNumericParam('triaje_id');
+	$triaje_id = GetNumParam('triaje_id');
 
 	$triaje_row = $triaje_dal->getByID($triaje_id);
 ?>

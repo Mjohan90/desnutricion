@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/categvariableDAL.php';
 	$catvar_dal = new categvariableDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$catvar_list = $catvar_dal->listar($b);
 ?>
 <table id='tblcategvariable' class='datatable'>

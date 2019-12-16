@@ -7,13 +7,14 @@
 <?php
 	include_once '../../datos/enfermedadDAL.php';
 	$enferm_dal = new enfermedadDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$enferm_list = $enferm_dal->listar($b);
 ?>
 <table id='tblenfermedad' class='datatable'>
 	<tr>
 		<th>ID</th>
 		<th>Nombre</th>
+		<th>Clase de enfermedad</th>
 		<th>Tratamiento sug</th>
 		<th>Dieta sug</th>
 		<th hidden>Estado</th>
@@ -24,6 +25,7 @@
 	<tr>
 		<td class='txt_center'><?php echo pad($row['enferm_id']); ?></td>
 		<td><?php echo $row['enferm_nombre']; ?></td>
+		<td><?php echo $row['clsenferm_nombre']; ?></td>
 		<td><?php echo $row['enferm_tratamiento_sug']; ?></td>
 		<td><?php echo $row['enferm_dieta_sug']; ?></td>
 		<td hidden><?php echo $row['enferm_estado']; ?></td>

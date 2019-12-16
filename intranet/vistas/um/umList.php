@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/umDAL.php';
 	$um_dal = new umDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$um_list = $um_dal->listar($b);
 ?>
 <table id='tblum' class='datatable'>

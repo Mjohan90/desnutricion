@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/direccionDAL.php';
 	$direc_dal = new direccionDAL();
-	$direc_id = GetNumericParam('direc_id');
+	$direc_id = GetNumParam('direc_id');
 
 	$direc_row = $direc_dal->getByID($direc_id);
 ?>

@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/indicadorDAL.php';
 	$indic_dal = new indicadorDAL();
-	$indic_id = GetNumericParam('indic_id');
+	$indic_id = GetNumParam('indic_id');
 
 	$indic_row = $indic_dal->getByID($indic_id);
 ?>

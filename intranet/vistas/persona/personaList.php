@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/personaDAL.php';
 	$pers_dal = new personaDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$pers_list = $pers_dal->listar($b);
 ?>
 <table id='tblpersona' class='datatable'>

@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/ubigeoDAL.php';
 	$ubig_dal = new ubigeoDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$ubig_list = $ubig_dal->listar($b);
 ?>
 <table id='tblubigeo' class='datatable'>

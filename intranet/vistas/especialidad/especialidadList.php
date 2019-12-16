@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/especialidadDAL.php';
 	$espec_dal = new especialidadDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$espec_list = $espec_dal->listar($b);
 ?>
 <table id='tblespecialidad' class='datatable'>

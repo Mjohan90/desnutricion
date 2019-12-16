@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/pacienteDAL.php';
 	$pac_dal  = new pacienteDAL();
-	$b        = GetStringParam('b');
+	$b        = GetStrParam('b');
 	$pac_list = $pac_dal->listar($b);
 ?>
 <table id='tblpaciente' class='datatable'>

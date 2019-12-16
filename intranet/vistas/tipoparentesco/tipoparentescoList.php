@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/tipoparentescoDAL.php';
 	$tparent_dal = new tipoparentescoDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$tparent_list = $tparent_dal->listar($b);
 ?>
 <table id='tbltipoparentesco' class='datatable'>

@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/tipoparentescoDAL.php';
 	$tparent_dal = new tipoparentescoDAL();
-	$tparent_id = GetNumericParam('tparent_id');
+	$tparent_id = GetNumParam('tparent_id');
 
 	$tparent_row = $tparent_dal->getByID($tparent_id);
 ?>

@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/resultadoDAL.php';
 	$result_dal = new resultadoDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$result_list = $result_dal->listar($b);
 ?>
 <table id='tblresultado' class='datatable'>

@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/historiaclinicaDAL.php';
 	$hc_dal = new historiaclinicaDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$hc_list = $hc_dal->listar($b);
 ?>
 <table id='tblhistoriaclinica' class='datatable'>

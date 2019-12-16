@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/empleadoDAL.php';
 	$empl_dal  = new empleadoDAL();
-	$b         = GetStringParam('b');
+	$b         = GetStrParam('b');
 	$empl_list = $empl_dal->listar($b);
 ?>
 <table id='tblempleado' class='datatable'>

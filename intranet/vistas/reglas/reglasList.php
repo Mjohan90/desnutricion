@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/reglasDAL.php';
 	$regla_dal = new reglasDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$regla_list = $regla_dal->listar($b);
 ?>
 <table id='tblreglas' class='datatable'>

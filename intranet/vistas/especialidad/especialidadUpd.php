@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/especialidadDAL.php';
 	$espec_dal = new especialidadDAL();
-	$espec_id = GetNumericParam('espec_id');
+	$espec_id = GetNumParam('espec_id');
 
 	$espec_row = $espec_dal->getByID($espec_id);
 ?>

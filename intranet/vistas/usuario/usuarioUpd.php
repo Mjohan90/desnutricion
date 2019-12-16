@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/usuarioDAL.php';
 	$usu_dal = new usuarioDAL();
-	$usu_id = GetNumericParam('usu_id');
+	$usu_id = GetNumParam('usu_id');
 
 	$usu_row = $usu_dal->getByID($usu_id);
 ?>

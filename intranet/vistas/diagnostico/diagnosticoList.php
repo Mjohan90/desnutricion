@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/diagnosticoDAL.php';
 	$diag_dal = new diagnosticoDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$diag_list = $diag_dal->listar($b);
 ?>
 <table id='tbldiagnostico' class='datatable'>

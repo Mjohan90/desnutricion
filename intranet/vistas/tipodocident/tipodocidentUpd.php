@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/tipodocidentDAL.php';
 	$tdi_dal = new tipodocidentDAL();
-	$tdi_id = GetNumericParam('tdi_id');
+	$tdi_id = GetNumParam('tdi_id');
 
 	$tdi_row = $tdi_dal->getByID($tdi_id);
 ?>

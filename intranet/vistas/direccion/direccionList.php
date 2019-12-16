@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/direccionDAL.php';
 	$direc_dal = new direccionDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$direc_list = $direc_dal->listar($b);
 ?>
 <table id='tbldireccion' class='datatable'>

@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/umDAL.php';
 	$um_dal = new umDAL();
-	$um_id = GetNumericParam('um_id');
+	$um_id = GetNumParam('um_id');
 
 	$um_row = $um_dal->getByID($um_id);
 ?>

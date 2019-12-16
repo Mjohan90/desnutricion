@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/diagnosticoDAL.php';
 	$diag_dal = new diagnosticoDAL();
-	$diag_id = GetNumericParam('diag_id');
+	$diag_id = GetNumParam('diag_id');
 
 	$diag_row = $diag_dal->getByID($diag_id);
 ?>

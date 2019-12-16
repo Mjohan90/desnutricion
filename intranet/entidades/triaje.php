@@ -7,6 +7,7 @@
 		var $var_id;
 		var $um_id;
 		var $valor;
+		var $escala;
 		var $fecha_reg;
 		var $estado;
 
@@ -24,6 +25,9 @@
 		}
 		public function getValor() {
 			return $this->valor;
+		}
+		public function getEscala() {
+			return $this->escala;
 		}
 		public function getFechaReg() {
 			return $this->fecha_reg;
@@ -46,6 +50,9 @@
 		}
 		public function setValor($triaje_valor) {
 			$this->valor = $triaje_valor;
+		}
+		public function setEscala($triaje_escala) {
+			$this->escala = $triaje_escala;
 		}
 		public function setFechaReg($triaje_fecha_reg) {
 			$this->fecha_reg = $triaje_fecha_reg;

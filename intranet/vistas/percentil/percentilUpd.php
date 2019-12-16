@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/percentilDAL.php';
 	$percent_dal = new percentilDAL();
-	$percent_id = GetNumericParam('percent_id');
+	$percent_id = GetNumParam('percent_id');
 
 	$percent_row = $percent_dal->getByID($percent_id);
 ?>

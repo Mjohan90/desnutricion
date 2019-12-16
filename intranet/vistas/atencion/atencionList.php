@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/atencionDAL.php';
 	$atenc_dal  = new atencionDAL();
-	$b          = GetStringParam('b');
+	$b          = GetStrParam('b');
 	$atenc_list = $atenc_dal->listar($b);
 ?>
 <table id='tblatencion' class='datatable'>

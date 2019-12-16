@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/indicadorDAL.php';
 	$indic_dal = new indicadorDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$indic_list = $indic_dal->listar($b);
 ?>
 <table id='tblindicador' class='datatable'>

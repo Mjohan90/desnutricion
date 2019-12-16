@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/resultadoDAL.php';
 	$result_dal = new resultadoDAL();
-	$result_id = GetNumericParam('result_id');
+	$result_id = GetNumParam('result_id');
 
 	$result_row = $result_dal->getByID($result_id);
 ?>

@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/pacienteDAL.php';
 	$pac_dal = new pacienteDAL();
-	$pac_id  = GetNumericParam('pac_id');
+	$pac_id  = GetNumParam('pac_id');
 	$pac_row = $pac_dal->getByID($pac_id);
 ?>
 <?php

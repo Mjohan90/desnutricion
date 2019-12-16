@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/ubigeoDAL.php';
 	$ubig_dal = new ubigeoDAL();
-	$ubig_id = GetNumericParam('ubig_id');
+	$ubig_id = GetNumParam('ubig_id');
 
 	$ubig_row = $ubig_dal->getByID($ubig_id);
 ?>

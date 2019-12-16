@@ -48,6 +48,30 @@
 		return $estados;
 	}
 	
+	define('TVAR_NUMERIC', 1);
+	define('TVAR_ESCALA', 2);
+	
+	function getTipoVar() {
+		$tipovar[TVAR_NUMERIC] = 'Numerico';
+		$tipovar[TVAR_ESCALA]  = 'Escala';
+		return $tipovar;
+	}
+	
+	define('TESC_NINGUNA', 1);
+	define('TESC_SINO', 2);
+	define('TESC_LIKERT3', 3);
+	define('TESC_LIKERT5', 4);
+	
+	function getTipoEscala() {
+		$tipoesc[TESC_NINGUNA] = 'Ninguna';
+		$tipoesc[TESC_SINO]    = 'Si/No';
+		$tipoesc[TESC_LIKERT3] = 'Likert 3';
+		$tipoesc[TESC_LIKERT5] = 'Likert 5';
+		return $tipoesc;
+	}
+	
+	define('VAR_EDAD', 3);
+	
 	// Desde el servidor:
 	function today() {
 		$mysql   = new Conexion();
@@ -195,11 +219,11 @@
 		return isset($_GET["$var_name"]);
 	}
 	
-	function GetNumericParam($var_name, $default = 0) {
+	function GetNumParam($var_name, $default = 0) {
 		return isset($_GET["$var_name"]) && is_numeric($_GET["$var_name"]) ? $_GET["$var_name"] : $default;
 	}
 	
-	function GetStringParam($var_name, $default = '') {
+	function GetStrParam($var_name, $default = '') {
 		return isset($_GET["$var_name"]) ? $_GET["$var_name"] : $default;
 	}
 	

@@ -4,6 +4,7 @@
 
 		var $enferm_id;
 		var $nombre;
+		var $clsenferm_id;
 		var $tratamiento_sug;
 		var $dieta_sug;
 		var $estado;
@@ -13,6 +14,9 @@
 		}
 		public function getNombre() {
 			return $this->nombre;
+		}
+		public function getClsenfermID() {
+			return $this->clsenferm_id;
 		}
 		public function getTratamientoSug() {
 			return $this->tratamiento_sug;
@@ -29,6 +33,9 @@
 		}
 		public function setNombre($enferm_nombre) {
 			$this->nombre = $enferm_nombre;
+		}
+		public function setClsenfermID($enferm_clsenferm_id) {
+			$this->clsenferm_id = $enferm_clsenferm_id;
 		}
 		public function setTratamientoSug($enferm_tratamiento_sug) {
 			$this->tratamiento_sug = $enferm_tratamiento_sug;

@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/cargoDAL.php';
 	$carg_dal = new cargoDAL();
-	$carg_id = GetNumericParam('carg_id');
+	$carg_id = GetNumParam('carg_id');
 
 	$carg_row = $carg_dal->getByID($carg_id);
 ?>

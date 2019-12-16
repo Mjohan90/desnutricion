@@ -7,7 +7,7 @@
 <?php
 	include_once '../../datos/rolDAL.php';
 	$rol_dal = new rolDAL();
-	$b = GetStringParam('b');
+	$b = GetStrParam('b');
 	$rol_list = $rol_dal->listar($b);
 ?>
 <table id='tblrol' class='datatable'>

@@ -17,6 +17,7 @@
 
 		$enferm->enferm_id	 = $enferm_id;
 		$enferm->nombre	 = getField('enferm_nombre', $enferm_row);
+		$enferm->clsenferm_id	 = getField('enferm_clsenferm_id', $enferm_row);
 		$enferm->tratamiento_sug	 = getField('enferm_tratamiento_sug', $enferm_row);
 		$enferm->dieta_sug	 = getField('enferm_dieta_sug', $enferm_row);
 		$enferm->estado	 = getField('enferm_estado', $enferm_row);

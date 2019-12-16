@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/categvariableDAL.php';
 	$catvar_dal = new categvariableDAL();
-	$catvar_id = GetNumericParam('catvar_id');
+	$catvar_id = GetNumParam('catvar_id');
 
 	$catvar_row = $catvar_dal->getByID($catvar_id);
 ?>

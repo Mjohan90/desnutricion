@@ -10,7 +10,7 @@
 <?php
 	include_once '../../datos/rolDAL.php';
 	$rol_dal = new rolDAL();
-	$rol_id = GetNumericParam('rol_id');
+	$rol_id = GetNumParam('rol_id');
 
 	$rol_row = $rol_dal->getByID($rol_id);
 ?>
