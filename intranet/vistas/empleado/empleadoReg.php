@@ -155,7 +155,7 @@ $(document).ready(function (e) {
             $(empl_reg).find('#trEspecialidad').show();
         } else {
             $(empl_reg).find('#trEspecialidad').hide();
-            $(empl_upd).find('#txtEmplEspecID').val(0);
+            $(empl_reg).find('#txtEmplEspecID').val(0);
         }
     }
 

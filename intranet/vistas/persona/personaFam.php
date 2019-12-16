@@ -5,7 +5,7 @@
 	CheckLoginAccess();
 ?>
 <?php
-	$parent = ReceiveParent('pers_fam', 'vistas/persona/persona.php');
+	$parent = ReceiveParent('pers_fam', 'vistas/persona/personaFam.php');
 ?>
 <?php
 	include_once '../../datos/personaDAL.php';
@@ -50,12 +50,14 @@
                     <td><label>Agregar familiar:</label></td>
                     <td>
                         <input type='text' id='txtPersPersNombre' name='txtPersPersNombre' maxlength='' value=''
-                               placeholder=''/>
+                               placeholder='buscar ...'/>
                         <input hidden type='text' id='txtPersPersID' name='txtPersPersID' maxlength='' value=''
                                placeholder=''/>
                     </td>
                     <td><a href='#' class='btn b_azul' id='btnAgregarPersona'
                            title="Agregar persona a la lista">Agregar</a></td>
+                    <td><a href='#' class='btn' id='btnNuevaPersona'
+                           title="Nueva persona">Nuevo</a></td>
                 </tr>
             </table>
         </td>
@@ -84,6 +86,9 @@ $(document).ready(function (e) {
     loadPersonas();
     divPersona_Init();
 
+    $(pers_fam).find('#btnNuevaPersona').off('click').click(function (e) {
+        performLoad('vistas/persona/personaReg.php?parent=vistas/persona/personaFam.php?pers_id=<?= $pers_id; ?>');
+    });
     $(pers_fam).find("#btnAgregarPersona").off('click').click(function (e) {
         if ($(pers_fam).find('#txtPersPersNombre').val()) {
             var pers_id = $(pers_fam).find('#txtPersPersID').val();

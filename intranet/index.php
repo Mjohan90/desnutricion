@@ -20,11 +20,11 @@
 	}
 	
 	define('ROL_ADMIN', 1);
-	define('ROL_RECEPCION', 2);
-	define('ROL_ENFERMERA', 3);
-	define('ROL_PACIENTE', 4);
-	define('ROL_MEDICO', 5);
-	define('ROL_CAJA', 6);
+	define('ROL_MEDICO', 2);
+	define('ROL_RECEPCION', 3);
+	define('ROL_ENFERMERA', 4);
+	define('ROL_CAJA', 5);
+	define('ROL_PACIENTE', 6);
 ?>
 <!DOCTYPE html>
 <html lang=''>
@@ -39,7 +39,7 @@
     <link rel="stylesheet" type="text/css" href='../recursos/css/multiselect.css'/>
     <link rel="stylesheet" type="text/css" href='../recursos/css/rangeslider.css'/>
     <link rel="stylesheet" type="text/css" href='../recursos/css/easy-autocomplete.min.css'/>
-    
+
     <script type='text/javascript' src='../recursos/js/jquery.min.js'></script>
     <script type='text/javascript' src='../recursos/js/jquery_ui.min.js'></script>
     <script type='text/javascript' src='../recursos/js/jquery.easy-autocomplete.min.js'></script>
@@ -89,56 +89,65 @@
 </tr>
 <tr>
 <td id='td_acordeon' style='width:200px;vertical-align:top;'>
-    <div id='acordeon' class='acordeon_wrapper'>
-        <ul id='items' class='acordeon'>
-			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
-                <li><a href='#'>Experto</a>
-                    <ul class='sub-menu'>
-                        <li><a href='#' onclick="load('categvariable')">Categorías de variable</a></li>
-                        <li><a href='#' onclick="load('variable')">Variables</a></li>
-                        <li><a href='#' onclick="load('claseenfermedad')">Clase de enfermedad</a></li>
-                        <li><a href='#' onclick="load('enfermedad')">Enfermedad</a></li>
-                    </ul>
-                </li>
+<div id='acordeon' class='acordeon_wrapper'>
+<ul id='items' class='acordeon'>
+<?php if ($rol_id == ROL_ADMIN) { ?>
+    <li><a href='#'>Experto</a>
+        <ul class='sub-menu'>
+            <li><a href='#' onclick="load('categvariable')">Categorías de variable</a></li>
+            <li><a href='#' onclick="load('variable')">Variables</a></li>
+            <li><a href='#' onclick="load('claseenfermedad')">Clase de enfermedad</a></li>
+            <li><a href='#' onclick="load('enfermedad')">Enfermedad</a></li>
+            <li hidden><a href='#' onclick="load('indicador')">Indicador</a></li>
+            <li><a href='#' onclick="loadOn('percentil', 'graficos')">Graficos</a></li>
+            <li><a href='#' onclick="load('percentil')">Percentil</a></li>
+        </ul>
+    </li>
+<?php } ?>
+<?php if ($rol_id == ROL_RECEPCION) { ?>
+    <li><a href='#'>Pacientes</a>
+        <ul class='sub-menu'>
+            <li><a href='#' onclick="load('paciente')">Pacientes</a></li>
+            <li><a href='#' onclick="load('tipoparentesco')">Tipo de parentesco</a></li>
+        </ul>
+    </li>
+<?php } ?>
+<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_MEDICO || $rol_id == ROL_RECEPCION || $rol_id == ROL_ENFERMERA) { ?>
+    <li><a href='#'>Atenciones</a>
+        <ul class='sub-menu'>
+			<?php if ($rol_id == ROL_RECEPCION) { ?>
+                <li><a href='#' onclick="loadOn('atencion', 'cita')">Citas</a></li>
 			<?php } ?>
-			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
-                <li><a href='#'>Pacientes</a>
-                    <ul class='sub-menu'>
-                        <li><a href='#' onclick="load('paciente')">Pacientes</a></li>
-                        <!--                            <li><a href='#' onclick="loadOn('persona', 'personaFam')">Parentescos</a></li>-->
-                        <li><a href='#' onclick="load('tipoparentesco')">Tipo de parentesco</a></li>
-                    </ul>
-                </li>
+			<?php if ($rol_id == ROL_MEDICO || $rol_id == ROL_ENFERMERA) { ?>
+                <li><a href='#' onclick="load('triaje')">Triaje</a></li>
 			<?php } ?>
-			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
-                <li><a href='#'>Atenciones</a>
-                    <ul class='sub-menu'>
-                        <li><a href='#' onclick="loadOn('atencion', 'cita')">Citas</a></li>
-                        <li><a href='#' onclick="load('triaje')">Triaje</a></li>
-                        <li><a href='#' onclick="load('atencion')">Atenciones</a></li>
-                        <li><a href='#' onclick="load('especialidad')">Especialidades</a></li>
-                    </ul>
-                </li>
+			<?php if ($rol_id == ROL_MEDICO) { ?>
+                <li><a href='#' onclick="load('atencion')">Atenciones</a></li>
 			<?php } ?>
-	
-	        <?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
-                <li><a href='#'>Personal</a>
-                    <ul class='sub-menu'>
-                        <li><a href='#' onclick="load('empleado')">Empleados</a></li>
-                        <li><a href='#' onclick="load('cargo')">Cargos</a></li>
-                    </ul>
-                </li>
-	        <?php } ?>
-         
-			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
-                <li><a href='#'>Seguridad</a>
-                    <ul class='sub-menu'>
-                        <li><a href='#' onclick="load('usuario')">Usuarios</a></li>
-                    </ul>
-                </li>
+			<?php if ($rol_id == ROL_ADMIN) { ?>
+                <li><a href='#' onclick="load('especialidad')">Especialidades</a></li>
 			<?php } ?>
         </ul>
-    </div>
+    </li>
+<?php } ?>
+<?php if ($rol_id == ROL_ADMIN) { ?>
+    <li><a href='#'>Personal</a>
+        <ul class='sub-menu'>
+            <li><a href='#' onclick="load('empleado')">Empleados</a></li>
+            <li><a href='#' onclick="load('cargo')">Cargos</a></li>
+        </ul>
+    </li>
+<?php } ?>
+<?php if ($rol_id == ROL_ADMIN) { ?>
+    <li><a href='#'>Seguridad</a>
+        <ul class='sub-menu'>
+            <li><a href='#' onclick="load('usuario')">Usuarios</a></li>
+            <li><a href='#' onclick="load('rol')">Roles</a></li>
+        </ul>
+    </li>
+<?php } ?>
+</ul>
+</div>
 </td>
 <td style='vertical-align:top;'>
     <div id='contenido' class='contenido'>

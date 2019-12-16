@@ -35,6 +35,7 @@
     <span class='h2'>Procesar atención</span>
 </div>
 <hr class='separator'/>
+<div class='inline' style='vertical-align: top;'>
 <table class='form_data'>
 <tr hidden>
     <td>Paciente ID</td>
@@ -62,7 +63,8 @@
 </tr>
 <tr>
     <td><label>Edad:</label></td>
-    <td><span><?= getYear(todayYMD()) - getYear($pac_row['pers_fecha_nac']) ?> años</span> - Fecha Nac: <?= formatDate($pac_row['pers_fecha_nac']) ?> </td>
+	<?php $edad = edad(todayYMD(), $pac_row['pers_fecha_nac'], true); ?>
+    <td><span><?= $edad['anios'] ?> años</span> - Fecha Nac: <?= formatDate($pac_row['pers_fecha_nac']) ?> </td>
 </tr>
 <tr hidden>
     <td><label for='txtAtencMedicoID'>Empleado:</label></td>
@@ -105,14 +107,14 @@
             <br>
             <!--            <a href='#' class='btn'>Ver ficha tecnica</a>-->
             <a href='#' id='btnTriaje' class='btn b_verde'>Triaje</a>
-            <a href='#' class='btn b_verde'>Ver resultados experto</a>
+            <a href='#' id='btnVerResultados' class='btn b_verde'>Ver resultados experto</a>
             <!--            <a href='#' class='btn'>Ver grafico evolución</a>-->
         </div>
     </td>
 </tr>
 <tr>
     <td><label for='txtAtencObservacion'>Observacion:</label></td>
-    <td><textarea id='txtAtencObservacion' name='txtAtencObservacion' maxlength='200' rows='5' cols='60'
+    <td><textarea id='txtAtencObservacion' name='txtAtencObservacion' maxlength='200' rows='5' cols='50'
                   class='' placeholder=''><?php if ($atenc_row) {
 				echo htmlspecialchars($atenc_row['atenc_observacion']);
 			} ?></textarea>
@@ -120,7 +122,7 @@
 </tr>
 <tr>
     <td><label for='txtAtencTratamiento'>Tratamiento:</label></td>
-    <td><textarea id='txtAtencTratamiento' name='txtAtencTratamiento' maxlength='200' rows='5' cols='60'
+    <td><textarea id='txtAtencTratamiento' name='txtAtencTratamiento' maxlength='200' rows='5' cols='50'
                   class='' placeholder=''><?php if ($atenc_row) {
 				echo htmlspecialchars($atenc_row['atenc_tratamiento']);
 			} ?></textarea>
@@ -128,7 +130,7 @@
 </tr>
 <tr>
     <td><label for='txtAtencDieta'>Dieta:</label></td>
-    <td> <textarea id='txtAtencDieta' name='txtAtencDieta' maxlength='200' rows='5' cols='60'
+    <td> <textarea id='txtAtencDieta' name='txtAtencDieta' maxlength='200' rows='5' cols='50'
                    class='' placeholder=''><?php if ($atenc_row) {
 				echo htmlspecialchars($atenc_row['atenc_dieta']);
 			} ?></textarea>
@@ -147,6 +149,8 @@
 		} ?>' placeholder='Ingrese estado'/></td>
 </tr>
 </table>
+</div>
+<div id='divResultado' class='inline' style='vertical-align: top;'></div>
 <hr class='separator'/>
 <div class='form_foot'>
     <input class='btn b_naranja' type='button' name='btnActualizar' id='btnActualizar' value='Guardar'/>
@@ -155,6 +159,7 @@
 </div>
 </div>
 </form>
+
 <br/>
 <script>
 var atenc_upd = '#frmAtencionUpd';
@@ -163,6 +168,10 @@ $(document).ready(function (e) {
 
     $(atenc_upd).find('#btnTriaje').off('click').click(function (e) {
         performLoad('vistas/triaje/triajeReg.php?atenc_id=<?= $atenc_id; ?>&parent=vistas/atencion/atencionUpd.php?atenc_id=<?= $atenc_id; ?>');
+    });
+
+    $(atenc_upd).find('#btnVerResultados').off('click').click(function (e) {
+        $('#divResultado').load('vistas/atencion/resultado.php');
     });
 
     $(atenc_upd).find('#btnActualizar').off('click').click(function (e) {

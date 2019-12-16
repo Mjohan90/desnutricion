@@ -72,6 +72,28 @@
 	
 	define('VAR_EDAD', 3);
 	
+	function getEscalaSiNo() {
+		$tipoesc[1] = 'Si';
+		$tipoesc[2] = 'No';
+		return $tipoesc;
+	}
+	
+	function getEscalaLikert5() {
+		$tipoesc[1] = 'Muy bajo';
+		$tipoesc[2] = 'Bajo';
+		$tipoesc[3] = 'Normal';
+		$tipoesc[4] = 'Alto';
+		$tipoesc[5] = 'Muy Alto';
+		return $tipoesc;
+	}
+	
+	function getEscalaLikert3() {
+		$tipoesc[1] = 'Bajo';
+		$tipoesc[2] = 'Normal';
+		$tipoesc[3] = 'Alto';
+		return $tipoesc;
+	}
+	
 	// Desde el servidor:
 	function today() {
 		$mysql   = new Conexion();

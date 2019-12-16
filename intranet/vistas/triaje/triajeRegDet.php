@@ -33,6 +33,7 @@
 	
 	if ($action == 'init') {
 		$triaje_list = $triaje_dal->listarByAtencion($atenc_id);
+		unset($_SESSION[$array_key]);
 		
 		if (count($triaje_list) > 0) {
 			foreach ($triaje_list as $triaje_row) {
@@ -62,8 +63,9 @@
 					'var_tipo_escala' => $var_row['var_tipo_escala'],
 					'triaje_um_id'    => $var_row['um_id'],
 					'triaje_um_abrev' => $var_row['um_abrev'],
-					'triaje_valor'    => ($var_row['um_id'] == VAR_EDAD) ? getYear(todayYMD()) - getYear($pac_row['pers_fecha_nac']) : 0
+					'triaje_valor'    => ($var_row['var_id'] == VAR_EDAD) ? edad(todayYMD(), $pac_row['pers_fecha_nac'], false) : 0
 				];
+				
 			}
 		}
 	} elseif ($action == 'add') {
@@ -133,29 +135,57 @@
         </tr>
 	<?php } ?>
     <tr>
-        <td class='txt_center'><?php echo pad(++$x, 2); ?></td>
-        <td><?php echo $item['var_nombre']; ?></td>
-        <td hidden>
-            <input type='text' id='txtTriajeUmID_<?php echo $var_key; ?>'
-                   value="<?php echo EmptyZero($item['triaje_um_id']); ?>"
-                   class='txtTriajeUmID txt70' title='um id'/></td>
+    <td class='txt_center'><?php echo pad(++$x, 2); ?></td>
+    <td><?php echo $item['var_nombre']; ?></td>
+    <td hidden>
+        <input type='text' id='txtTriajeUmID_<?php echo $var_key; ?>'
+               value="<?php echo EmptyZero($item['triaje_um_id']); ?>"
+               class='txtTriajeUmID txt70' title='um id'/></td>
+	<?php if ($item['var_tipo_var'] == TVAR_NUMERIC) { ?>
         <td class='txt_center'>
-			<?php if ($item['var_tipo_var'] == TVAR_NUMERIC) { ?>
-                <input <?= $item['var_id'] == VAR_EDAD ? 'disabled' : '' ?>
-                        type='text' id='txtTriajeValor_<?php echo $var_key; ?>'
-                        value="<?php echo EmptyZero($item['triaje_valor']); ?>"
-                        class='txtTriajeValor txt70' title='valor'/>
-			<?php } ?>
+			<?php $hidden = ($item['var_id'] == VAR_EDAD) ? "hidden" : ""; ?>
+			<?php $edad = edad(todayYMD(), $pac_row['pers_fecha_nac'], true); ?>
+
+            <input <?= $hidden ?>
+                   type='text' id='txtTriajeValor_<?php echo $var_key; ?>'
+                   value="<?php echo int_nformat($item['triaje_valor'], 2); ?>"
+                   class='txtTriajeValor txt70' title='valor'/>
+            
+            <?php if($item['var_id'] == VAR_EDAD) { ?>
+                <input readonly type='text' value='<?= "$edad[anios]a $edad[meses]m" ?>' class='txt70'>
+            <?php } ?>
+            
         </td>
         <td class='txt_center'>
-            <input readonly type='text' id='txtTriajeUmAbrev_<?php echo $var_key; ?>'
+            <input <?= $hidden ?> readonly type='text' id='txtTriajeUmAbrev_<?php echo $var_key; ?>'
                    value="<?php echo $item['triaje_um_abrev']; ?>"
                    class='txtTriajeUmAbrev txt70 bg_lgris' title='um abrev'/>
         </td>
-        <td></td>
-        <td hidden>
-            <a href='#' onclick="divAtencion_RemoveVariable('<?php echo $var_key; ?>');return false;">Quitar</a>
+	<?php } elseif ($item['var_tipo_var'] == TVAR_ESCALA) { ?>
+		<?php
+		$esc_list = [];
+		if ($item['var_tipo_escala'] == TESC_SINO) {
+			$esc_list = getEscalaSiNo();
+		} elseif ($item['var_tipo_escala'] == TESC_LIKERT3) {
+			$esc_list = getEscalaLikert3();
+		} elseif ($item['var_tipo_escala'] == TESC_LIKERT5) {
+			$esc_list = getEscalaLikert5();
+		} ?>
+        <td colspan='2' class='txt_center'>
+			<?php foreach ($esc_list as $esc_key => $esc_nombre) { ?>
+                <label class='check'>
+                    <input type='radio' class='chkTriajeValor' name='txtTriajeValor_<?php echo $var_key; ?>'
+                           id='txtTriajeValor_<?php echo $var_key; ?>' value='<?= $esc_key ?>'
+					       <?= $esc_key == $item['triaje_valor'] ? 'checked' : '' ?>>
+					<?= $esc_nombre ?>
+                </label>
+			<?php } ?>
         </td>
+	<?php } ?>
+    <td></td>
+    <td hidden>
+        <a href='#' onclick="divAtencion_RemoveVariable('<?php echo $var_key; ?>');return false;">Quitar</a>
+    </td>
     </tr>
 <?php } ?>
 <?php if (count($triaje) == 0) { ?>
@@ -166,7 +196,6 @@
     </tr>
 <?php } ?>
 </table>
-
 <div style='display: none;'>
 	<?php
 		$txtTriajeUmID_wrong  = '';
@@ -190,7 +219,6 @@
     <input type='text' id='txtTriajeValor_wrong' value='<?php echo $txtTriajeValor_wrong; ?>'
            class='txt60' title=''>
 </div>
-
 <script>
     var triaje_reg = '#frmTriajeReg';
     $(triaje_reg).find('.txtTriajeUmID').change(function (e) {
@@ -203,6 +231,12 @@
         var input_id     = e.target.id;
         var var_key      = input_id.split('_').slice(1).join('_');
         var triaje_valor = $(triaje_reg).find('#' + input_id).val();
+        divAtencion_UpdateTriajeValor(var_key, triaje_valor);
+    });
+    $(triaje_reg).find('.chkTriajeValor').change(function (e) {
+        var input_id     = e.target.id;
+        var var_key      = input_id.split('_').slice(1).join('_');
+        var triaje_valor = $(triaje_reg).find("input[name=" + input_id + "]:checked").val();
         divAtencion_UpdateTriajeValor(var_key, triaje_valor);
     });
     $(triaje_reg).find('#tblTriaje').find('input').keydown(function (e) {

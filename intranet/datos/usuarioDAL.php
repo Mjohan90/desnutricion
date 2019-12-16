@@ -58,7 +58,6 @@
 				CALL pa_usuario_update(
 					'$usu->usu_id',
 					'$usu->nombre',
-					'$usu->contrasena',
 					'$usu->empl_id',
 					'$usu->rol_id');");
 			return $rs;

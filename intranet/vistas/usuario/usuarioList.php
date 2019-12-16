@@ -18,7 +18,7 @@
         <th>Rol</th>
         <th hidden>Registrado</th>
         <th>Estado</th>
-        <th hidden>Editar</th>
+        <th>Editar</th>
         <th>Desactivar</th>
     </tr>
 	<?php foreach ($usu_list as $row) { ?>
@@ -32,7 +32,7 @@
                     <?php echo getEstados()[$row['usu_estado']]; ?>
                 </span>
             </td>
-            <td hidden class='txt_center'>
+            <td class='txt_center'>
                 <a href='#' onclick="usu_editar('<?php echo $row['usu_id']; ?>');">Editar</a>
             </td>
             <td class='txt_center'>

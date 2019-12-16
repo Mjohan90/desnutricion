@@ -53,8 +53,7 @@
 					'$enferm->nombre',
 					'$enferm->clsenferm_id',
 					'$enferm->tratamiento_sug',
-					'$enferm->dieta_sug',
-					'$enferm->estado');");
+					'$enferm->dieta_sug');");
 			return $rs;
 		}
 

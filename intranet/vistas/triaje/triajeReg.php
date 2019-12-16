@@ -44,10 +44,20 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan='2'>
-                        <label class='bold'>Paciente: </label>
+                    <td><label class='bold'>Paciente: </label></td>
+                    <td>
                         <span class=''><?= $pac_row['pers_nombre'], ' ', $pac_row['pers_ap_paterno'], ' ', $pac_row['pers_ap_materno']; ?></span>
                     </td>
+                </tr>
+                <tr>
+                    <td><label>D.I.:</label></td>
+                    <td><span><?= $pac_row['tdi_abrev'], ' - ', $pac_row['pers_tdi_nro'] ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Edad:</label></td>
+					<?php $edad = edad(todayYMD(), $pac_row['pers_fecha_nac'], true); ?>
+                    <td><span><?= $edad['anios'] ?> años</span></td>
                 </tr>
                 <tr>
                     <td colspan='2'>
@@ -62,20 +72,25 @@
             </div>
         </div>
     </div>
+    <div id='divResultado'>
+    
+    </div>
 </form>
 <br/>
 <script>
 var triaje_reg = '#frmTriajeReg';
 $(document).ready(function (e) {
     $(triaje_reg).find('#txtTriajeAtencID').focus();
-    
+
     divAtencion_Init();
     $(triaje_reg).find('#btnRegistrar').off('click').click(function (e) {
         if (triaje_validar()) {
             var triaje_atenc_id = $(triaje_reg).find('#txtTriajeAtencID').val();
 
             $.post('vistas/triaje/proceso/triaje_insert.php', {
-                    triaje_atenc_id: triaje_atenc_id
+                    triaje_atenc_id: triaje_atenc_id,
+                    pac_sexo       : '<?= $pac_row['pers_sexo'] ?>',
+                    pac_edad_meses : '<?= $edad['anios'] * 12 + $edad['meses']; ?>'
                 },
                 function (datos) {
                     if (datos > 0) {

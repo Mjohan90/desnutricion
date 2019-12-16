@@ -17,6 +17,7 @@
 			session_start();
 			$_SESSION['auth.usu_id']          = $row['usu_id'];
 			$_SESSION['auth.pers_id']         = $row['pers_id'];
+			$_SESSION['auth.empl_id']         = $row['empl_id'];
 			$_SESSION['auth.rol_id']          = $row['rol_id'];
 			$_SESSION['auth.rol_nombre']      = $row['rol_nombre'];
 			$_SESSION['auth.pers_nombres']    = $row['pers_nombre'];

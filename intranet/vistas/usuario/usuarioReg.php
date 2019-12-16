@@ -37,6 +37,11 @@
         </td>
     </tr>
     <tr>
+        <td><label for='txtUsuNombre'>Nombre de usuario:</label></td>
+        <td><input type='text' id='txtUsuNombre' name='txtUsuNombre' maxlength='20'
+                   placeholder='Ingrese nombre'/></td>
+    </tr>
+    <tr>
         <td><label for='txtUsuRolID'>Rol:</label></td>
         <td><select id='txtUsuRolID' name='txtUsuRolID'> <!-- maxlength='10' -->
                 <option value='0'>(Seleccione)</option>
@@ -48,11 +53,6 @@
 				<?php } ?>
             </select>
         </td>
-    </tr>
-    <tr>
-        <td><label for='txtUsuNombre'>Nombre de usuario:</label></td>
-        <td><input type='text' id='txtUsuNombre' name='txtUsuNombre' maxlength='20'
-                   placeholder='Ingrese nombre'/></td>
     </tr>
     <tr>
         <td><label for='txtUsuContrasena'>Contraseña:</label></td>

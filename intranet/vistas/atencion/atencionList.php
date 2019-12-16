@@ -14,7 +14,6 @@
     <tr>
         <th>ID</th>
         <th>Paciente</th>
-        <!--		<th>Empleado</th>-->
         <th>Especialidad</th>
         <th>Fecha atenc</th>
         <th>Observacion</th>
@@ -26,21 +25,23 @@
         <th>Editar</th>
     </tr>
 	<?php foreach ($atenc_list as $row) { ?>
-        <tr>
-            <td class='txt_center'><?php echo pad($row['atenc_id']); ?></td>
-            <td><?php echo $row['pac_nombre'], ' ', $row['pac_ap_paterno'], ' ', $row['pac_ap_materno']; ?></td>
-            <!--		<td>--><?php //echo $row['empl_id']; ?><!--</td>-->
-            <td><?php echo $row['espec_nombre']; ?></td>
-            <td class='txt_center'><?php echo formatDate($row['atenc_fecha_atenc']); ?></td>
-            <td><?php echo $row['atenc_observacion']; ?></td>
-            <td><?php echo $row['atenc_tratamiento']; ?></td>
-            <td><?php echo $row['atenc_dieta']; ?></td>
-            <td><?php echo getSituacionAtencion()[$row['atenc_situacion']]; ?></td>
-            <td class='txt_center' hidden><?php echo $row['atenc_fecha_reg']; ?></td>
-            <td hidden><?php echo $row['atenc_estado']; ?></td>
-            <td class='txt_center'><a href='#' onclick="atenc_editar('<?php echo $row['atenc_id']; ?>');">Atender</a>
-            </td>
-        </tr>
+		<?php if ($row['empl_id'] == $_SESSION['auth.empl_id']) { ?>
+            <tr>
+                <td class='txt_center'><?php echo pad($row['atenc_id']); ?></td>
+                <td><?php echo $row['pac_nombre'], ' ', $row['pac_ap_paterno'], ' ', $row['pac_ap_materno']; ?></td>
+                <td><?php echo $row['espec_nombre']; ?></td>
+                <td class='txt_center'><?php echo formatDate($row['atenc_fecha_atenc']); ?></td>
+                <td><?php echo $row['atenc_observacion']; ?></td>
+                <td><?php echo $row['atenc_tratamiento']; ?></td>
+                <td><?php echo $row['atenc_dieta']; ?></td>
+                <td><?php echo getSituacionAtencion()[$row['atenc_situacion']]; ?></td>
+                <td class='txt_center' hidden><?php echo $row['atenc_fecha_reg']; ?></td>
+                <td hidden><?php echo $row['atenc_estado']; ?></td>
+                <td class='txt_center'><a href='#'
+                                          onclick="atenc_editar('<?php echo $row['atenc_id']; ?>');">Atender</a>
+                </td>
+            </tr>
+		<?php } ?>
 	<?php } ?>
 </table>
 <script>
