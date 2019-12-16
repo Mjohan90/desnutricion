@@ -36,7 +36,7 @@
 <table class='form_data'>
 <tr>
     <td><label for='txtAtencPacID'>Paciente:</label></td>
-    <td><select id='txtAtencPacID' name='txtAtencPacID'> <!-- maxlength='10' -->
+    <td><select disabled id='txtAtencPacID' name='txtAtencPacID' class='txt300'> <!-- maxlength='10' -->
             <option value='0'>(Seleccione)</option>
 			<?php $pac_list = $pac_dal->listarcbo($atenc_row['atenc_pac_id']); ?>
 			<?php foreach ($pac_list as $row) { ?>
@@ -49,24 +49,10 @@
     </td>
 </tr>
 <tr>
-    <td><label for='txtAtencMedicoID'>Empleado:</label></td>
-    <td><select id='txtAtencMedicoID' name='txtAtencMedicoID'> <!-- maxlength='10' -->
-            <option value='0'>(Seleccione)</option>
-			<?php $empl_list = $empl_dal->listarmedicos($atenc_row['atenc_medico_id']); ?>
-			<?php foreach ($empl_list as $row) { ?>
-                <option value='<?php echo $row['empl_id']; ?>'
-					<?php echo ($row['empl_id'] == $atenc_row['empl_id']) ? 'selected' : ''; ?>>
-					<?php echo $row['pers_nombre'], ' ', $row['pers_ap_materno'], ' ', $row['pers_ap_paterno']; ?>
-                </option>
-			<?php } ?>
-        </select>
-    </td>
-</tr>
-<tr>
     <td><label for='txtAtencEspecID'>Especialidad:</label></td>
-    <td><select id='txtAtencEspecID' name='txtAtencEspecID'> <!-- maxlength='10' -->
+    <td><select disabled id='txtAtencEspecID' name='txtAtencEspecID'> <!-- maxlength='10' -->
             <option value='0'>(Seleccione)</option>
-			<?php $espec_list = $espec_dal->listarcbo($atenc_row['atenc_espec_id']); ?>
+			<?php $espec_list = $espec_dal->listar($atenc_row['atenc_espec_id']); ?>
 			<?php foreach ($espec_list as $row) { ?>
                 <option value='<?php echo $row['espec_id']; ?>'
 					<?php echo ($row['espec_id'] == $atenc_row['espec_id']) ? 'selected' : ''; ?>>
@@ -77,6 +63,20 @@
     </td>
 </tr>
 <tr>
+    <td><label for='txtAtencMedicoID'>Médico:</label></td>
+    <td><select id='txtAtencMedicoID' name='txtAtencMedicoID'> <!-- maxlength='10' -->
+            <option value='0'>(Seleccione)</option>
+			<?php $empl_list = $empl_dal->listarMedicosByEspecialidad($atenc_row['espec_id']); ?>
+			<?php foreach ($empl_list as $row) { ?>
+                <option value='<?php echo $row['empl_id']; ?>'
+					<?php echo ($row['empl_id'] == $atenc_row['empl_id']) ? 'selected' : ''; ?>>
+					<?php echo $row['pers_nombre'], ' ', $row['pers_ap_materno'], ' ', $row['pers_ap_paterno']; ?>
+                </option>
+			<?php } ?>
+        </select>
+    </td>
+</tr>
+<tr hidden>
     <td><label for='txtAtencFechaAtenc'>Fecha atención:</label></td>
     <td><input type='text' id='txtAtencFechaAtenc' name='txtAtencFechaAtenc' value='<?php if ($atenc_row) {
 			echo formatDate($atenc_row['atenc_fecha_atenc']);

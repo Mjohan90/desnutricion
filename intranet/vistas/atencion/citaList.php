@@ -8,7 +8,8 @@
 	include_once '../../datos/atencionDAL.php';
 	$atenc_dal  = new atencionDAL();
 	$b          = GetStringParam('b');
-	$atenc_list = $atenc_dal->listar($b);
+	$fecha      = GetStringParam('fecha');
+	$atenc_list = $atenc_dal->listarByFecha($fecha, $b);
 ?>
 <table id='tblatencion' class='datatable'>
     <tr>
@@ -55,7 +56,7 @@
                 function (datos) {
                     if (datos > 0) {
                         alert('Borrado correcto');
-                       // volver();
+                        // volver();
                     } else {
                         alert('Error al borrar. ' + datos);
                     }

@@ -19,6 +19,10 @@
 	include_once '../../datos/pacienteDAL.php';
 	$pac_dal = new pacienteDAL();
 ?>
+<?php
+	include_once '../../datos/tipodocidentDAL.php';
+	$tdi_dal = new tipodocidentDAL();
+?>
 <form id='frmAtencionReg' method='post'>
 <div class='regform'>
 <div class='regform_body'>
@@ -28,34 +32,30 @@
 <hr class='separator'/>
 <table class='form_data'>
 <tr>
-    <td><label for='txtAtencPacID'>Paciente:</label></td>
-    <td><select id='txtAtencPacID' name='txtAtencPacID' class='txt200'> <!-- maxlength='10' -->
-            <option value='0'>(Seleccione)</option>
-			<?php $pac_list = $pac_dal->listarcbo(); ?>
-			<?php foreach ($pac_list as $row) { ?>
-                <option value='<?php echo $row['pac_id']; ?>'>
-					<?php echo $row['pers_nombre'], ' ', $row['pers_ap_paterno'], ' ', $row['pers_ap_materno']; ?>
+    <td><label>D.I. Paciente:</label></td>
+    <td><select id='txtAtencTdiID' name='txtAtencTdiID' class='txt110'>
+			<?php $tdi_list = $tdi_dal->listarcbo(); ?>
+			<?php foreach ($tdi_list as $row) { ?>
+                <option value='<?php echo $row['tdi_id']; ?>'>
+					<?php echo $row['tdi_abrev']; ?>
                 </option>
 			<?php } ?>
         </select>
+        <input type='text' id='txtAtencPacTdiNro' name='txtAtencPacTdiNro' class='txt190' maxlength=''
+               placeholder='Nº documento identidad'/>
+        <a href='#' class='btn' id='btnConsultarPacienteTdi'>Consultar</a>
     </td>
 </tr>
+
 <tr>
-    <td><label for='txtAtencMedicoID'>Médico:</label></td>
-    <td><select id='txtAtencMedicoID' name='txtAtencMedicoID'> <!-- maxlength='10' -->
-            <option value='0'>(Seleccione)</option>
-			<?php $empl_list = $empl_dal->listarmedicos(); ?>
-			<?php foreach ($empl_list as $row) { ?>
-                <option value='<?php echo $row['empl_id']; ?>'>
-					<?php echo $row['pers_nombre'], ' ', $row['pers_ap_paterno'], ' ', $row['pers_ap_materno']; ?>
-                </option>
-			<?php } ?>
-        </select>
+    <td><label for='txtAtencPacID'>Paciente:</label></td>
+    <td><input hidden type='text' id='txtAtencPacID' name='txtAtencPacID' class='txt100' maxlength='' placeholder=''/>
+        <input readonly type='text' id='txtAtencPacNombre' name='txtAtencPacNombre' maxlength='' placeholder='(nombre del paciente)'/>
     </td>
 </tr>
 <tr>
     <td><label for='txtAtencEspecID'>Especialidad:</label></td>
-    <td><select id='txtAtencEspecID' name='txtAtencEspecID'> <!-- maxlength='10' -->
+    <td><select id='txtAtencEspecID' name='txtAtencEspecID'>
             <option value='0'>(Seleccione)</option>
 			<?php $espec_list = $espec_dal->listarcbo(); ?>
 			<?php foreach ($espec_list as $row) { ?>
@@ -67,6 +67,19 @@
     </td>
 </tr>
 <tr>
+    <td><label for='txtAtencMedicoID'>Médico:</label></td>
+    <td><select id='txtAtencMedicoID' name='txtAtencMedicoID' class='txt250'>
+            <option value='0'>(Seleccione)</option>
+			<?php //$empl_list = $empl_dal->listarmedicos(); ?>
+			<?php //foreach ($empl_list as $row) { ?>
+            <!--<option value='--><?php //echo $row['empl_id']; ?><!--'>-->
+			<?php //echo $row['pers_nombre'], ' ', $row['pers_ap_paterno'], ' ', $row['pers_ap_materno']; ?>
+            <!--</option>-->
+			<?php //} ?>
+        </select>
+    </td>
+</tr>
+<tr hidden>
     <td><label for='txtAtencFechaAtenc'>Fecha y hora:</label></td>
     <td><input type='text' id='txtAtencFechaAtenc' name='txtAtencFechaAtenc' class='txt150' placeholder='00/00/0000'/>
         <input type='hidden' id='txtAtencHoraAtenc' name='txtAtencHoraAtenc' class='txt100' placeholder='00:00'/>
@@ -103,8 +116,62 @@
 <script>
 var atenc_reg = '#frmAtencionReg';
 $(document).ready(function (e) {
-    $(atenc_reg).find('#txtAtencPacID').focus();
+    $(atenc_reg).find('#txtAtencPacTdiNro').focus();
     $(atenc_reg).find('#txtAtencFechaAtenc').datepicker();
+
+    $(atenc_reg).find('#txtAtencEspecID').change(function (e) {
+        loadMedicos();
+    });
+    $(atenc_reg).find('#btnConsultarPacienteTdi').off('click').click(function (e) {
+        consultarPacienteTdi();
+    });
+    $(atenc_reg).find('#txtAtencPacTdiNro').keypress(function (e) {
+        if (e.which == 13) {
+            consultarPacienteTdi();
+        }
+    });
+
+    function loadMedicos() {
+        var atenc_espec_id = $(atenc_reg).find('#txtAtencEspecID').val();
+        var cboMedicos     = $(atenc_reg).find('#txtAtencMedicoID');
+
+        $.post('vistas/empleado/proceso/medicos_by_especialidad.php', {
+                espec_id: atenc_espec_id
+            },
+            function (datos) {
+                var medicos_list  = jsonParse(datos);
+                var medicos_count = medicos_list.length;
+
+                cboMedicos.empty();
+                cboMedicos.append(new Option('(Seleccione)', ''));
+                for (var i = 0; i < medicos_count; i++) {
+                    var empl_id     = medicos_list[i]['empl_id'];
+                    var empl_nombre = medicos_list[i]['pers_nombre'] + ' ' + medicos_list[i]['pers_ap_paterno'] + ' ' + medicos_list[i]['pers_ap_materno'];
+                    cboMedicos.append(new Option(empl_nombre, empl_id));
+                }
+            });
+    }
+
+    function consultarPacienteTdi() {
+        var tdi_id  = $(atenc_reg).find('#txtAtencTdiID').val();
+        var tdi_nro = $(atenc_reg).find('#txtAtencPacTdiNro').val();
+
+        $.post('vistas/paciente/proceso/paciente_getByTdi.php', {
+                tdi_id : tdi_id,
+                tdi_nro: tdi_nro
+            },
+            function (datos) {
+                var pac_row = jsonParse(datos);
+                if (pac_row) {
+                    $(atenc_reg).find('#txtAtencPacID').val(pac_row['pac_id']);
+                    $(atenc_reg).find('#txtAtencPacNombre').val(pac_row['pers_nombre'] + ' ' + pac_row['pers_ap_paterno'] + ' ' + pac_row['pers_ap_materno']);
+                } else {
+                    $(atenc_reg).find('#txtAtencPacID').val('');
+                    $(atenc_reg).find('#txtAtencPacNombre').val('(paciente no encontrado)');
+                }
+            });
+    }
+
     $(atenc_reg).find('#btnRegistrar').off('click').click(function (e) {
         if (atenc_validar()) {
             var atenc_pac_id      = $(atenc_reg).find('#txtAtencPacID').val();
@@ -164,8 +231,8 @@ function atenc_validar() {
         return false;
     }
     if (!isDate(atenc_fecha_atenc)) {
-        showMessageWarning('Ingrese una <b>fecha atenc</b> válida', 'txtAtencFechaAtenc');
-        return false;
+        // showMessageWarning('Ingrese una <b>fecha atenc</b> válida', 'txtAtencFechaAtenc');
+        // return false;
     }
     if (atenc_observacion == '') {
         // showMessageWarning('Ingrese una <b>observacion</b> válida', 'txtAtencObservacion');

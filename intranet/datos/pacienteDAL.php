@@ -18,6 +18,13 @@
 			return $row;
 		}
 		
+		function getByTdi($tdi_id, $tdi_nro) {
+			$mysql = new Conexion();
+			$rs    = $mysql->ejecutar("CALL pa_paciente_getByTdi('$tdi_id', '$tdi_nro');");
+			$row   = $rs ? mysqli_fetch_assoc($rs) : null;
+			return $row;
+		}
+		
 		public function listarcbo($pac_id = 0) {
 			$mysql = new Conexion();
 			$rs    = $mysql->ejecutar("CALL pa_paciente_listcbo('$pac_id');");

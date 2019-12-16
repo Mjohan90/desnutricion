@@ -38,8 +38,11 @@
     <link rel="stylesheet" type="text/css" href='../recursos/css/spectrum.css'/>
     <link rel="stylesheet" type="text/css" href='../recursos/css/multiselect.css'/>
     <link rel="stylesheet" type="text/css" href='../recursos/css/rangeslider.css'/>
+    <link rel="stylesheet" type="text/css" href='../recursos/css/easy-autocomplete.min.css'/>
+    
     <script type='text/javascript' src='../recursos/js/jquery.min.js'></script>
     <script type='text/javascript' src='../recursos/js/jquery_ui.min.js'></script>
+    <script type='text/javascript' src='../recursos/js/jquery.easy-autocomplete.min.js'></script>
     <script type='text/javascript' src='../recursos/js/spectrum.js'></script>
     <script>$.fn.spectrum.load = false;</script>
     <script type='text/javascript' src='../recursos/js/moment.js'></script>
@@ -85,58 +88,71 @@
     </td>
 </tr>
 <tr>
-    <td id='td_acordeon' style='width:200px;vertical-align:top;'>
-        <div id='acordeon' class='acordeon_wrapper'>
-            <ul id='items' class='acordeon'>
-				<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
-                    <li><a href='#'>Experto</a>
-                        <ul class='sub-menu'>
-                            <li><a href='#' onclick="load('categvariable')">Categorías de variable</a></li>
-<!--                            <li><a href='#' onclick="load('diagnostico')">Diagnosticos</a></li>-->
-                        </ul>
-                    </li>
-				<?php } ?>
-				<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
-                    <li><a href='#'>Pacientes</a>
-                        <ul class='sub-menu'>
-                            <li><a href='#' onclick="load('paciente')">Pacientes</a></li>
-<!--                            <li><a href='#' onclick="load('parentesco')">Parentescos</a></li>-->
-                            <li><a href='#' onclick="load('tipoparentesco')">Tipo de parentesco</a></li>
-                        </ul>
-                    </li>
-				<?php } ?>
-	            <?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
-                    <li><a href='#'>Atenciones</a>
-                        <ul class='sub-menu'>
-<!--                            <li><a href='#' onclick="load('atencion')">Atencion</a></li>-->
-                        </ul>
-                    </li>
-	            <?php } ?>
-	            <?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
-                    <li><a href='#'>Seguridad</a>
-                        <ul class='sub-menu'>
-                            <li><a href='#' onclick="load('usuario')">Usuarios</a></li>
-                        </ul>
-                    </li>
-	            <?php } ?>
-            </ul>
-        </div>
-    </td>
-    <td style='vertical-align:top;'>
-        <div id='contenido' class='contenido'>
-			<?php if ($pagina == 'index.php') { ?>
-                <div style='text-align:center;margin-top:15px;'>
-                    <h1>Bienvenido <?php if ($usuario_id) {
-							echo ': '.$pers_nombres.' '.$pers_ap_paterno.'<br/>('.$rol_nombre.')';
-						} ?>
-                    </h1><br><br>
-                    <img src='../recursos/img/nutricion.jpg' style='width: 100%; max-width: 673px;' alt=''>
-                </div>
-			<?php } else {
-				echo "<script>$('#contenido').load('$pagina');</script>";
-			} ?>
-        </div>
-    </td>
+<td id='td_acordeon' style='width:200px;vertical-align:top;'>
+    <div id='acordeon' class='acordeon_wrapper'>
+        <ul id='items' class='acordeon'>
+			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
+                <li><a href='#'>Experto</a>
+                    <ul class='sub-menu'>
+                        <li><a href='#' onclick="load('categvariable')">Categorías de variable</a></li>
+                        <li><a href='#' onclick="load('enfermedad')">Enfermedad</a></li>
+                    </ul>
+                </li>
+			<?php } ?>
+			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
+                <li><a href='#'>Pacientes</a>
+                    <ul class='sub-menu'>
+                        <li><a href='#' onclick="load('paciente')">Pacientes</a></li>
+                        <!--                            <li><a href='#' onclick="loadOn('persona', 'personaFam')">Parentescos</a></li>-->
+                        <li><a href='#' onclick="load('tipoparentesco')">Tipo de parentesco</a></li>
+                    </ul>
+                </li>
+			<?php } ?>
+			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
+                <li><a href='#'>Atenciones</a>
+                    <ul class='sub-menu'>
+                        <li><a href='#' onclick="loadOn('atencion', 'cita')">Citas</a></li>
+                        <li><a href='#' onclick="load('triaje')">Triaje</a></li>
+                        <li><a href='#' onclick="load('atencion')">Atenciones</a></li>
+                        <li><a href='#' onclick="load('especialidad')">Especialidades</a></li>
+                    </ul>
+                </li>
+			<?php } ?>
+	
+	        <?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
+                <li><a href='#'>Personal</a>
+                    <ul class='sub-menu'>
+                        <li><a href='#' onclick="load('empleado')">Empleados</a></li>
+                        <li><a href='#' onclick="load('cargo')">Cargos</a></li>
+                    </ul>
+                </li>
+	        <?php } ?>
+         
+			<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
+                <li><a href='#'>Seguridad</a>
+                    <ul class='sub-menu'>
+                        <li><a href='#' onclick="load('usuario')">Usuarios</a></li>
+                    </ul>
+                </li>
+			<?php } ?>
+        </ul>
+    </div>
+</td>
+<td style='vertical-align:top;'>
+    <div id='contenido' class='contenido'>
+		<?php if ($pagina == 'index.php') { ?>
+            <div style='text-align:center;margin-top:15px;'>
+                <h1>Bienvenido <?php if ($usuario_id) {
+						echo ': '.$pers_nombres.' '.$pers_ap_paterno.'<br/>('.$rol_nombre.')';
+					} ?>
+                </h1><br><br>
+                <img src='../recursos/img/nutricion.jpg' style='width: 100%; max-width: 673px;' alt=''>
+            </div>
+		<?php } else {
+			echo "<script>$('#contenido').load('$pagina');</script>";
+		} ?>
+    </div>
+</td>
 </tr>
 </table>
 

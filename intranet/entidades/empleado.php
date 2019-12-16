@@ -5,6 +5,7 @@
 		var $empl_id;
 		var $pers_id;
 		var $carg_id;
+		var $espec_id;
 		var $fecha_reg;
 		var $estado;
 

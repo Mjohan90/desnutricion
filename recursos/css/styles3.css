@@ -722,6 +722,9 @@ h3, .h3 {
 .bg_gris {
     background : #F2F2F2;
 }
+.bg_lgris {
+    background : #F7F7FF;
+}
 .bg_azul {
     background : #3F88C9;
 }
@@ -1722,6 +1725,15 @@ input[type='button']:active, .btn:active {
 ::-moz-focus-inner {
     border  : 0;
     padding : 0;
+}
+.width70px {
+    max-width : 70px;
+}
+.width80px {
+    max-width : 80px;
+}
+.width90px {
+    max-width : 90px;
 }
 .width100px {
     max-width : 100px;

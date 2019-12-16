@@ -7,22 +7,45 @@
 <?php
 	$parent = ReceiveParent('diag_reg', 'vistas/diagnostico/diagnostico.php');
 ?>
+<?php
+	include_once '../../datos/atencionDAL.php';
+	$atenc_dal = new atencionDAL();
+?>
+<?php
+	include_once '../../datos/enfermedadDAL.php';
+	$enferm_dal = new enfermedadDAL();
+?>
 <form id='frmDiagnosticoReg' method='post'>
 <div class='regform'>
 <div class='regform_body'>
 <div class='form_title'>
-	<span class='h2'>Registrar diagnóstico</span>
+	<span class='h2 blanco'>Registrar diagnóstico</span>
 </div>
 <hr class='separator'/>
 <table class='form_data'>
-	<tr><td><label for='txtDiagNombre'>Nombre:</label></td>
-		<td><input type='text' id='txtDiagNombre' name='txtDiagNombre' maxlength='50' placeholder='Ingrese nombre'/></td>
+	<tr><td><label for='txtDiagAtencID'>Atención:</label></td>
+		<td><select id='txtDiagAtencID' name='txtDiagAtencID'> <!-- maxlength='10' -->
+			<option value = '0'>(Seleccione)</option>
+			<?php $atenc_list = $atenc_dal->listarcbo(); ?>
+			<?php foreach($atenc_list as $row) { ?>
+				<option value='<?php echo $row['atenc_id']; ?>'>
+					<?php echo $row['atenc_id'];  ?>
+				</option>
+			<?php } ?>
+			</select>
+		</td>
 	</tr>
-	<tr><td><label for='txtDiagTratamientoSug'>Tratamiento sug:</label></td>
-		<td><input type='text' id='txtDiagTratamientoSug' name='txtDiagTratamientoSug' maxlength='500' placeholder='Ingrese tratamiento sug'/></td>
-	</tr>
-	<tr><td><label for='txtDiagDietaSug'>Dieta sug:</label></td>
-		<td><input type='text' id='txtDiagDietaSug' name='txtDiagDietaSug' maxlength='500' placeholder='Ingrese dieta sug'/></td>
+	<tr><td><label for='txtDiagEnfermID'>Enfermedad:</label></td>
+		<td><select id='txtDiagEnfermID' name='txtDiagEnfermID'> <!-- maxlength='10' -->
+			<option value = '0'>(Seleccione)</option>
+			<?php $enferm_list = $enferm_dal->listarcbo(); ?>
+			<?php foreach($enferm_list as $row) { ?>
+				<option value='<?php echo $row['enferm_id']; ?>'>
+					<?php echo $row['enferm_nombre'];  ?>
+				</option>
+			<?php } ?>
+			</select>
+		</td>
 	</tr>
 </table>
 <hr class='separator'/>
@@ -35,17 +58,15 @@
 <script>
 var diag_reg = '#frmDiagnosticoReg';
 $(document).ready(function(e) {
-	$(diag_reg).find('#txtDiagNombre').focus();
+	$(diag_reg).find('#txtDiagAtencID').focus();
 	$(diag_reg).find('#btnRegistrar').off('click').click(function(e) {
 		if (diag_validar()){
-			var diag_nombre = $(diag_reg).find('#txtDiagNombre').val();
-			var diag_tratamiento_sug = $(diag_reg).find('#txtDiagTratamientoSug').val();
-			var diag_dieta_sug = $(diag_reg).find('#txtDiagDietaSug').val();
+			var diag_atenc_id = $(diag_reg).find('#txtDiagAtencID').val();
+			var diag_enferm_id = $(diag_reg).find('#txtDiagEnfermID').val();
 
 			$.post('vistas/diagnostico/proceso/diagnostico_insert.php',{
-				diag_nombre : diag_nombre,
-				diag_tratamiento_sug : diag_tratamiento_sug,
-				diag_dieta_sug : diag_dieta_sug
+				diag_atenc_id : diag_atenc_id,
+				diag_enferm_id : diag_enferm_id
 			},
 			function(datos) {
 				if (datos > 0) {
@@ -62,20 +83,15 @@ $(document).ready(function(e) {
 	});
 });
 function diag_validar() {
-	var diag_nombre = $(diag_reg).find('#txtDiagNombre').val();
-	var diag_tratamiento_sug = $(diag_reg).find('#txtDiagTratamientoSug').val();
-	var diag_dieta_sug = $(diag_reg).find('#txtDiagDietaSug').val();
+	var diag_atenc_id = $(diag_reg).find('#txtDiagAtencID').val();
+	var diag_enferm_id = $(diag_reg).find('#txtDiagEnfermID').val();
 
-	if (diag_nombre == '') {
-		showMessageWarning('Ingrese una <b>nombre</b> válida de diagnóstico', 'txtDiagNombre');
+	if (!(isInteger(diag_atenc_id) && diag_atenc_id > 0)) {
+		showMessageWarning('Seleccione <b>atención</b>', 'txtDiagAtencID');
 		return false;
 	}
-	if (diag_tratamiento_sug == '') {
-		showMessageWarning('Ingrese una <b>tratamiento sug</b> válida', 'txtDiagTratamientoSug');
-		return false;
-	}
-	if (diag_dieta_sug == '') {
-		showMessageWarning('Ingrese una <b>dieta sug</b> válida', 'txtDiagDietaSug');
+	if (!(isInteger(diag_enferm_id) && diag_enferm_id > 0)) {
+		showMessageWarning('Seleccione <b>enfermedad</b>', 'txtDiagEnfermID');
 		return false;
 	}
 	return true;
