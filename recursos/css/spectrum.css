@@ -368,9 +368,6 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     cursor:pointer;
     padding: 4px;
     display:inline-block;
-    *
-    zoom: 1;
-    *
     display: inline;
     border: solid 1px #c7c7c7;
     background: #ececec;
