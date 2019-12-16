@@ -13,18 +13,20 @@
 <table id='tbldiagnostico' class='datatable'>
 	<tr>
 		<th>ID</th>
-		<th>Atención</th>
-		<th>Enfermedad</th>
-		<th hidden>Registrado</th>
+		<th>Nombre</th>
+		<th>Tratamiento sug</th>
+		<th>Dieta sug</th>
+		<th hidden>Estado</th>
 		<th>Editar</th>
 		<th>Borrar</th>
 	</tr>
 	<?php foreach($diag_list as $row) { ?>
 	<tr>
 		<td class='txt_center'><?php echo pad($row['diag_id']); ?></td>
-		<td><?php echo $row['atenc_id']; ?></td>
-		<td><?php echo $row['enferm_nombre']; ?></td>
-		<td class='txt_center' hidden><?php echo $row['diag_fecha_reg']; ?></td>
+		<td><?php echo $row['diag_nombre']; ?></td>
+		<td><?php echo $row['diag_tratamiento_sug']; ?></td>
+		<td><?php echo $row['diag_dieta_sug']; ?></td>
+		<td hidden><?php echo $row['diag_estado']; ?></td>
 		<td class='txt_center'><a href='#' onclick="diag_editar('<?php echo $row['diag_id']; ?>');">Editar</a></td>
 		<td class='txt_center'><a href='#' onclick="diag_borrar('<?php echo $row['diag_id']; ?>');">Borrar</a></td>
 	</tr>

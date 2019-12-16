@@ -23,7 +23,7 @@
 	<?php foreach($empl_list as $row) { ?>
 	<tr>
 		<td class='txt_center'><?php echo pad($row['empl_id']); ?></td>
-		<td><?php echo $row['pers_nombre'], ' ', $row['pers_ap_paterno'], ' ', $row['pers_ap_materno'], ' '; ?></td>
+		<td><?php echo $row['pers_nombre']; ?></td>
 		<td><?php echo $row['carg_nombre']; ?></td>
 		<td class='txt_center' hidden><?php echo $row['empl_fecha_reg']; ?></td>
 		<td hidden><?php echo $row['empl_estado']; ?></td>

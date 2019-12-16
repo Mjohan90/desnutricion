@@ -8,13 +8,14 @@
 	include_once '../../../entidades/diagnostico.php';
 	include_once '../../../datos/diagnosticoDAL.php';
 
-	if (isset($_POST['diag_atenc_id'], $_POST['diag_enferm_id'])){
+	if (isset($_POST['diag_nombre'], $_POST['diag_tratamiento_sug'], $_POST['diag_dieta_sug'])){
 
 		$diag_dal = new diagnosticoDAL();
 		$diag = new diagnostico();
 
-		$diag->atenc_id = $_POST['diag_atenc_id'];
-		$diag->enferm_id = $_POST['diag_enferm_id'];
+		$diag->nombre = $_POST['diag_nombre'];
+		$diag->tratamiento_sug = $_POST['diag_tratamiento_sug'];
+		$diag->dieta_sug = $_POST['diag_dieta_sug'];
 
 		$diag_rs = $diag_dal->registrar($diag);
 		echo ($diag_rs > 0) ? $diag_rs : 'No se ha podido registrar';

@@ -19,7 +19,6 @@
         <th>Fecha nac</th>
         <th hidden>Registrado</th>
         <th hidden>Estado</th>
-        <th>Familiares</th>
         <th>Editar</th>
         <th>Borrar</th>
     </tr>
@@ -32,8 +31,6 @@
             <td class='txt_center'><?php echo formatDate($row['pers_fecha_nac']); ?></td>
             <td class='txt_center' hidden><?php echo $row['pac_fecha_reg']; ?></td>
             <td hidden><?php echo $row['pac_estado']; ?></td>
-            <td class='txt_center'><a href='#' onclick="pac_familiares('<?php echo $row['pers_id']; ?>');">Familiares</a>
-            </td>
             <td class='txt_center'><a href='#' onclick="pac_editar('<?php echo $row['pac_id']; ?>');">Editar</a></td>
             <td class='txt_center'><a href='#' onclick="pac_borrar('<?php echo $row['pac_id']; ?>');">Borrar</a></td>
         </tr>
@@ -42,10 +39,6 @@
 <script>
     function pac_editar(pac_id) {
         performLoad('vistas/paciente/pacienteUpd.php?pac_id=' + pac_id);
-    }
-
-    function pac_familiares(pers_id) {
-        performLoad('vistas/persona/personaFam.php?pers_id=' + pers_id + '&parent=vistas/paciente/paciente.php');
     }
 
     function pac_borrar(pac_id) {

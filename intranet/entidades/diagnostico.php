@@ -3,33 +3,40 @@
 	class diagnostico {
 
 		var $diag_id;
-		var $atenc_id;
-		var $enferm_id;
-		var $fecha_reg;
+		var $nombre;
+		var $tratamiento_sug;
+		var $dieta_sug;
+		var $estado;
 
 		public function getDiagID() {
 			return $this->diag_id;
 		}
-		public function getAtencID() {
-			return $this->atenc_id;
+		public function getNombre() {
+			return $this->nombre;
 		}
-		public function getEnfermID() {
-			return $this->enferm_id;
+		public function getTratamientoSug() {
+			return $this->tratamiento_sug;
 		}
-		public function getFechaReg() {
-			return $this->fecha_reg;
+		public function getDietaSug() {
+			return $this->dieta_sug;
+		}
+		public function getEstado() {
+			return $this->estado;
 		}
 
 		public function setDiagID($diag_id) {
 			$this->diag_id = $diag_id;
 		}
-		public function setAtencID($diag_atenc_id) {
-			$this->atenc_id = $diag_atenc_id;
+		public function setNombre($diag_nombre) {
+			$this->nombre = $diag_nombre;
 		}
-		public function setEnfermID($diag_enferm_id) {
-			$this->enferm_id = $diag_enferm_id;
+		public function setTratamientoSug($diag_tratamiento_sug) {
+			$this->tratamiento_sug = $diag_tratamiento_sug;
 		}
-		public function setFechaReg($diag_fecha_reg) {
-			$this->fecha_reg = $diag_fecha_reg;
+		public function setDietaSug($diag_dieta_sug) {
+			$this->dieta_sug = $diag_dieta_sug;
+		}
+		public function setEstado($diag_estado) {
+			$this->estado = $diag_estado;
 		}
 	}

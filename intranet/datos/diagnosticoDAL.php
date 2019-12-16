@@ -23,9 +23,9 @@
 			return $mysql->rsToArray($rs);
 		}
 
-		public function listar($b = '') {
+		public function listar($b = '', $diag_estado = 1) {
 			$mysql = new Conexion();
-			$rs = $mysql->ejecutar("CALL pa_diagnostico_list('$b');");
+			$rs = $mysql->ejecutar("CALL pa_diagnostico_list('$b', '$diag_estado');");
 			return $mysql->rsToArray($rs);
 		}
 
@@ -35,8 +35,9 @@
 			$rs = $mysql->ejecutar("
 				CALL pa_diagnostico_insert(
 					@diag_id,
-					'$diag->atenc_id',
-					'$diag->enferm_id');");
+					'$diag->nombre',
+					'$diag->tratamiento_sug',
+					'$diag->dieta_sug');");
 
 			$diag_id = $rs ? $mysql->getLastID() : 0;
 			$mysql->desconectar();
@@ -48,9 +49,21 @@
 			$rs = $mysql->ejecutar("
 				CALL pa_diagnostico_update(
 					'$diag->diag_id',
-					'$diag->atenc_id',
-					'$diag->enferm_id');");
+					'$diag->nombre',
+					'$diag->tratamiento_sug',
+					'$diag->dieta_sug');");
 			return $rs;
 		}
 
+		public function borrar($diag_id) {
+			$mysql = new Conexion();
+			$rs = $mysql->ejecutar("CALL pa_diagnostico_delete('$diag_id');");
+			return $rs;
+		}
+
+		public function activar($diag_id) {
+			$mysql = new Conexion();
+			$rs = $mysql->ejecutar("CALL pa_diagnostico_activate('$diag_id');");
+			return $rs;
+		}
 	}
