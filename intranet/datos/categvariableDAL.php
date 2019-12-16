@@ -47,8 +47,7 @@
 			$rs = $mysql->ejecutar("
 				CALL pa_categvariable_update(
 					'$catvar->catvar_id',
-					'$catvar->nombre',
-					'$catvar->estado');");
+					'$catvar->nombre');");
 			return $rs;
 		}
 

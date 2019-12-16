@@ -49,8 +49,7 @@
 				CALL pa_um_update(
 					'$um->um_id',
 					'$um->nombre',
-					'$um->abrev',
-					'$um->estado');");
+					'$um->abrev');");
 			return $rs;
 		}
 

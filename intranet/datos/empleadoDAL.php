@@ -49,8 +49,7 @@
 				CALL pa_empleado_update(
 					'$empl->empl_id',
 					'$empl->pers_id',
-					'$empl->carg_id',
-					'$empl->estado');");
+					'$empl->carg_id');");
 			return $rs;
 		}
 

@@ -47,8 +47,7 @@
 			$rs = $mysql->ejecutar("
 				CALL pa_cargo_update(
 					'$carg->carg_id',
-					'$carg->nombre',
-					'$carg->estado');");
+					'$carg->nombre');");
 			return $rs;
 		}
 

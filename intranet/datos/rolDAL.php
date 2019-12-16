@@ -47,8 +47,7 @@
 			$rs = $mysql->ejecutar("
 				CALL pa_rol_update(
 					'$rol->rol_id',
-					'$rol->nombre',
-					'$rol->estado');");
+					'$rol->nombre');");
 			return $rs;
 		}
 

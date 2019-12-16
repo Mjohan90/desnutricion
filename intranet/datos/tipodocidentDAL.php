@@ -49,8 +49,7 @@
 				CALL pa_tipodocident_update(
 					'$tdi->tdi_id',
 					'$tdi->nombre',
-					'$tdi->abrev',
-					'$tdi->estado');");
+					'$tdi->abrev');");
 			return $rs;
 		}
 

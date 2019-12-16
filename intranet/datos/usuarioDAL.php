@@ -60,8 +60,7 @@
 					'$usu->nombre',
 					'$usu->contrasena',
 					'$usu->empl_id',
-					'$usu->rol_id',
-					'$usu->estado');");
+					'$usu->rol_id');");
 			return $rs;
 		}
 		
@@ -76,4 +75,11 @@
 			$rs    = $mysql->ejecutar("CALL pa_usuario_activate('$usu_id');");
 			return $rs;
 		}
+		
+		public function desactivar($usu_id) {
+			$mysql = new Conexion();
+			$rs    = $mysql->ejecutar("UPDATE usuario SET usu_estado = 2 WHERE usu_id = '$usu_id';");
+			return $rs;
+		}
+		
 	}

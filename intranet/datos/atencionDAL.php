@@ -62,8 +62,7 @@
 					'$atenc->observacion',
 					'$atenc->tratamiento',
 					'$atenc->dieta',
-					'$atenc->situacion',
-					'$atenc->estado');");
+					'$atenc->situacion');");
 			return $rs;
 		}
 

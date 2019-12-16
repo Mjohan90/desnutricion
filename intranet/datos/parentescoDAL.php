@@ -53,8 +53,7 @@
 					'$parent->pers1_id',
 					'$parent->pers2_id',
 					'$parent->tparent_id',
-					'$parent->es_apoderado',
-					'$parent->estado');");
+					'$parent->es_apoderado');");
 			return $rs;
 		}
 

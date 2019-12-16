@@ -55,8 +55,7 @@
 					'$ubig->dpto_cod',
 					'$ubig->prov_cod',
 					'$ubig->dist_cod',
-					'$ubig->nombre',
-					'$ubig->estado');");
+					'$ubig->nombre');");
 			return $rs;
 		}
 

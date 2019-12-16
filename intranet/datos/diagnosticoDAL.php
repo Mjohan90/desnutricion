@@ -51,8 +51,7 @@
 					'$diag->diag_id',
 					'$diag->nombre',
 					'$diag->tratamiento_sug',
-					'$diag->dieta_sug',
-					'$diag->estado');");
+					'$diag->dieta_sug');");
 			return $rs;
 		}
 

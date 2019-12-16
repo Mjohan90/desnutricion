@@ -51,8 +51,7 @@
 					'$indic->indic_id',
 					'$indic->nombre',
 					'$indic->var1_id',
-					'$indic->var2_id',
-					'$indic->estado');");
+					'$indic->var2_id');");
 			return $rs;
 		}
 

@@ -1,12 +1,12 @@
 <?php
     include_once 'conexion.php';
-
-    define('ROL_ADMIN', 1);
-    define('ROL_COMPRA', 2);
-    define('ROL_ALMACEN', 3);
-    define('ROL_VENTA', 4);
-    define('ROL_CAJA', 5);
-    define('ROL_CLIENTE', 6);
+	
+	define('ROL_ADMIN', 1);
+	define('ROL_RECEPCION', 2);
+	define('ROL_ENFERMERA', 3);
+	define('ROL_PACIENTE', 4);
+	define('ROL_MEDICO', 5);
+	define('ROL_CAJA', 6);
 
     define('CLI_PERSONA', 1);
     define('CLI_EMPRESA', 2);

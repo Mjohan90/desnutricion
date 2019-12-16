@@ -47,8 +47,7 @@
 			$rs = $mysql->ejecutar("
 				CALL pa_tipoparentesco_update(
 					'$tparent->tparent_id',
-					'$tparent->nombre',
-					'$tparent->estado');");
+					'$tparent->nombre');");
 			return $rs;
 		}
 

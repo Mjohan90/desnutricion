@@ -20,11 +20,11 @@
 	}
 	
 	define('ROL_ADMIN', 1);
-	define('ROL_COMPRA', 2);
-	define('ROL_ALMACEN', 3);
-	define('ROL_VENTA', 4);
-	define('ROL_CAJA', 5);
-	define('ROL_CLIENTE', 6);
+	define('ROL_RECEPCION', 2);
+	define('ROL_ENFERMERA', 3);
+	define('ROL_PACIENTE', 4);
+	define('ROL_MEDICO', 5);
+	define('ROL_CAJA', 6);
 ?>
 <!DOCTYPE html>
 <html lang=''>
@@ -88,31 +88,31 @@
     <td id='td_acordeon' style='width:200px;vertical-align:top;'>
         <div id='acordeon' class='acordeon_wrapper'>
             <ul id='items' class='acordeon'>
-				<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ALMACEN || $rol_id == ROL_COMPRA) { ?>
+				<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
                     <li><a href='#'>Experto</a>
                         <ul class='sub-menu'>
                             <li><a href='#' onclick="load('categvariable')">Categorías de variable</a></li>
-                            <li><a href='#' onclick="load('diagnostico')">Diagnosticos</a></li>
+<!--                            <li><a href='#' onclick="load('diagnostico')">Diagnosticos</a></li>-->
                         </ul>
                     </li>
 				<?php } ?>
-				<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ALMACEN || $rol_id == ROL_COMPRA) { ?>
+				<?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
                     <li><a href='#'>Pacientes</a>
                         <ul class='sub-menu'>
                             <li><a href='#' onclick="load('paciente')">Pacientes</a></li>
-                            <li><a href='#' onclick="load('parentesco')">Parentescos</a></li>
+<!--                            <li><a href='#' onclick="load('parentesco')">Parentescos</a></li>-->
                             <li><a href='#' onclick="load('tipoparentesco')">Tipo de parentesco</a></li>
                         </ul>
                     </li>
 				<?php } ?>
-	            <?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ALMACEN || $rol_id == ROL_COMPRA) { ?>
+	            <?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
                     <li><a href='#'>Atenciones</a>
                         <ul class='sub-menu'>
-                            <li><a href='#' onclick="load('atencion')">Atencion</a></li>
+<!--                            <li><a href='#' onclick="load('atencion')">Atencion</a></li>-->
                         </ul>
                     </li>
 	            <?php } ?>
-	            <?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ALMACEN || $rol_id == ROL_COMPRA) { ?>
+	            <?php if ($rol_id == ROL_ADMIN || $rol_id == ROL_ENFERMERA || $rol_id == ROL_RECEPCION) { ?>
                     <li><a href='#'>Seguridad</a>
                         <ul class='sub-menu'>
                             <li><a href='#' onclick="load('usuario')">Usuarios</a></li>

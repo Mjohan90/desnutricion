@@ -47,8 +47,7 @@
 			$rs = $mysql->ejecutar("
 				CALL pa_especialidad_update(
 					'$espec->espec_id',
-					'$espec->nombre',
-					'$espec->estado');");
+					'$espec->nombre');");
 			return $rs;
 		}
 

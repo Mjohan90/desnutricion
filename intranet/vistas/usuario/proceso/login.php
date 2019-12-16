@@ -13,7 +13,7 @@
 	$row = $dal_usu->login($usu->nombre, $usu->contrasena);
 	
 	if ($row) {
-		if ($row['usu_estado'] == 1) {
+		if ($row['usu_estado'] == ACTIVO) {
 			session_start();
 			$_SESSION['auth.usu_id']          = $row['usu_id'];
 			$_SESSION['auth.pers_id']         = $row['pers_id'];

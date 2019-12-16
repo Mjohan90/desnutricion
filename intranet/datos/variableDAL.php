@@ -53,8 +53,7 @@
 					'$var->catvar_id',
 					'$var->nombre',
 					'$var->um_id',
-					'$var->tipo_var',
-					'$var->estado');");
+					'$var->tipo_var');");
 			return $rs;
 		}
 

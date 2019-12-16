@@ -67,8 +67,7 @@
 					'$pers->fecha_nac',
 					'$pers->email',
 					'$pers->celular',
-					'$pers->telefono',
-					'$pers->estado');");
+					'$pers->telefono');");
 			return $rs;
 		}
 
