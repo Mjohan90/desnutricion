@@ -14,7 +14,7 @@
 	<a href='#' class='btn' id='btnRefrescar' name='btnRefrescar'>
 		<img class='icon' src='../recursos/img/refresh.png'>
 	</a>
-	<a href='#' class='btn b_azul' id='btnNuevo' name='btnNuevo'>Nuevo</a>
+<!--	<a href='#' class='btn b_azul' id='btnNuevo' name='btnNuevo'>Nuevo</a>-->
 </div>
 </div>
 <hr class='separator'/>

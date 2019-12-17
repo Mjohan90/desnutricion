@@ -27,7 +27,9 @@
 	<?php foreach ($atenc_list as $atenc_row) { ?>
 		<?php $total_region = $atenc_row['enferm_1'] + $atenc_row['enferm_2'] + $atenc_row['enferm_3'] + $atenc_row['enferm_4']; ?>
         <tr>
-            <td><?= $atenc_row['ubig_nombre_full'] ?></td>
+            <td><a href='#' onclick='verGraficoReporte(<?= $atenc_row['ubig_id'] ?>)'>
+					<?= $atenc_row['ubig_nombre_full'] ?></a>
+            </td>
             <td><?= $atenc_row['enferm_1'] ?></td>
             <td><?= $atenc_row['enferm_2'] ?></td>
             <td><?= $atenc_row['enferm_3'] ?></td>
@@ -36,3 +38,10 @@
         </tr>
 	<?php } ?>
 </table>
+<div id='grafico'></div>
+<script>
+    function verGraficoReporte(ubig_id) {
+        var anio = toInteger('<?= $anio ?>');
+        $('#grafico').load('vistas/reportes/niveldesnutricionGrafico.php?anio=' + anio + '&ubig_id=' + ubig_id);
+    }
+</script>

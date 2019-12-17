@@ -55,6 +55,12 @@
 			return $mysql->rsToArray($rs);
 		}
 		
+		public function reporteDiagnosticosByUbigId($anio, $ubig_id) {
+			$mysql = new Conexion();
+			$rs    = $mysql->ejecutar("CALL pa_diagnostico_reporteByUbigId('$anio', '$ubig_id');");
+			return $mysql->rsToArray($rs)[0];
+		}
+		
 		public function getTriajeValores($pac_id) {
 			$mysql = new Conexion();
 			$rs    = $mysql->ejecutar("CALL pa_atencion_getTriajeValores('$pac_id');");
