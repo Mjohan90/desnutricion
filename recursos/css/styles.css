@@ -1151,6 +1151,11 @@ input[type='button']:active, .btn:active {
     border     : 0px;
     border-top : 2px solid #e3e8ee;
 }
+.separator_x {
+    margin     : 0px;
+    border     : 0px;
+    border-top : 1px solid #E3E8EE;
+}
 /* OK ·.· ------------------------------------------------------- */
 .txt_right {
     text-align : right;
